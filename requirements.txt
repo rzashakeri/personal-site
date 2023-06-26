@@ -1,0 +1,7 @@
+django==4.1.9  # pyup: < 4.2  # https://www.djangoproject.com/
+python-dotenv==1.0.0
+django-render-partial==0.4  # https://github.com/utapyngo/django-render-partial
+django-ckeditor==6.5.1 # https://github.com/django-ckeditor/django-ckeditor
+django-environ==0.10.0  # https://github.com/joke2k/django-environ
+django-debug-toolbar==4.1.0  # https://github.com/jazzband/django-debug-toolbar
+psycopg2-binary
