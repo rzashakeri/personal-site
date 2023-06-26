@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static i18n %}
+{% block extra_javascript %}
+  <script type="text/javascript" src="{% static 'js/skills.js' %}"></script>
+{% endblock %}
+{% block title %}Reza Shakeri | {% translate "skills" %}{% endblock %}
+{% block social_media %}{% endblock %}
+{% block main_top_bar %}
+  {% include 'shared/partials/main_top_bar.html' %}
+{% endblock %}
+
+{% block content %}
+  <div class="skills-section">
+    <div class="skills-head">
+      <h1 class="skills-head-title">{% translate "skills" %}</h1>
+    </div>
+    <div class="skills-content">
+      {% for category in skill_category %}
+        <div class="skill-items">
+          <p class="skill-title">{{ category.name }}</p>
+          <div class="skill-item">
+            {% for skill in category.skill_set.all %}
+              <div class="skill">
+                <img class="skill-icon" src="{{ skill.thumbnail_url }}" alt="">
+                <p class="skill-description">{{ skill.name }}</p>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+
+    </div>
+  </div>
+{% endblock content %}

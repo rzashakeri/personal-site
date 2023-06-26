@@ -1,0 +1,60 @@
+{% load static render_partial %}
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-menu">
+      <div class="navbar-logo-items-title">
+        <div class="navbar-logo-and-items">
+          <div class="navbar-logo">
+            <img
+              class="navbar-pycharm-logo"
+              src="{% static 'images/icons/pycharm-logo.svg' %}"
+              alt=""
+              width="16"
+            />
+          </div>
+          <ul class="navbar-items">
+
+            <li class="navbar-item">
+              <a class="navbar-link" href="#">File</a>
+            </li>
+            <li class="navbar-item">
+              <a class="navbar-link" href="#">Edit</a>
+            </li>
+            <li class="navbar-item">
+              <a class="navbar-link" href="#">View</a>
+            </li>
+            <li class="navbar-item">
+              <a class="navbar-link" href="#">Navigate</a>
+            </li>
+            <li class="navbar-item">
+              <a class="navbar-link" href="#">Code</a>
+            </li>
+          </ul>
+        </div>
+        {% render_partial 'pages.views.render_navbar_title' %}
+      </div>
+      <div class="navbar-buttons">
+        <img class="navbar-button navbar-minimize-button" src="{% static 'images/icons/minimize_dark.svg' %}" alt="">
+        <img class="navbar-button navbar-maximize-button" src="{% static 'images/icons/maximize_dark.svg' %}" alt="">
+        <img class="navbar-button navbar-close-button" src="{% static 'images/icons/close_dark.svg' %}" alt="">
+      </div>
+    </div>
+    <div class="breadcrumb">
+      <div class="breadcrumb-head">
+        <div class="breadcrumb-head-item">
+          <div class="breadcrumb-icon">
+            <img src="{% static 'images/icons/toolWindowProject.svg' %}" width="17" alt="">
+          </div>
+          {% render_partial 'pages.views.breadcrumb_title' %}
+        </div>
+        <img class="breadcrumb-arrow" src="{% static 'images/icons/play_forward.svg' %}" alt="">
+        <div class="breadcrumb-head-item">
+          <div class="breadcrumb-icon">
+            <img src="{{ page.icon.url }}" width="17" alt="">
+          </div>
+          <p class="breadcrumb-title"><a href="/{{ page.slug }}">{{ page.title }}</a></p>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>

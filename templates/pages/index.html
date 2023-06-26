@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static render_partial %}
+{% block extra_javascript %}
+  <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+{% endblock %}
+{% block title %}Reza Shakeri | {{ page.title }}{% endblock %}
+{% block social_media %}
+  {% render_partial 'pages.views.render_social_media' %}
+{% endblock %}
+{% block content %}
+  <div id="main-menu">
+    <div id="main-menu-items">
+      <div class="main-menu-head">
+        <h1 class="main-menu-head-title">{{ portfolio.name }}</h1>
+        <p class="main-menu-head-description">{{ portfolio.job_title }}</p>
+      </div>
+      <div class="main-menu-item">
+        <p class="main-menu-item-text">About Me</p>
+        <a class="main-menu-item-link" href="#">Ctrl + A</a>
+      </div>
+      <div class="main-menu-item">
+        <p class="main-menu-item-text">Skills</p>
+        <a class="main-menu-item-link" href="#">Ctrl + S</a>
+      </div>
+      <div class="main-menu-item">
+        <p class="main-menu-item-text">Projects</p>
+        <a class="main-menu-item-link" href="#">Ctrl + P</a>
+      </div>
+      <div class="main-menu-item">
+        <p class="main-menu-item-text">Home</p>
+        <a class="main-menu-item-link" href="#">Ctrl + H</a>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

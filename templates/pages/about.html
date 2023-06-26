@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static i18n %}
+{% block extra_javascript %}
+  <script type="text/javascript" src="{% static 'js/about.js' %}"></script>
+{% endblock %}
+{% block title %}Reza Shakeri | {% translate "about" %}{% endblock %}
+{% block main_top_bar %}
+  {% include 'shared/partials/main_top_bar.html' %}
+{% endblock %}
+{% block content %}
+  <div class="about-section">
+    <h1 class="about-title">{{ about.heading }}</h1>
+    <div class="about-description">{{ about.body|safe }}</div>
+  </div>
+{% endblock content %}

@@ -1,0 +1,10 @@
+{% load static %}
+<div id="main-top-bar">
+  <div id="main-top-bar-item">
+    <div id="main-top-bar-content">
+      <img src="{{ page.icon.url }}" alt="user svg"/>
+      <span id="main-top-bar-item-text">{{ page.title }}</span>
+      <img src="{% static 'images/icons/close.svg' %}" alt=""/>
+    </div>
+  </div>
+</div>

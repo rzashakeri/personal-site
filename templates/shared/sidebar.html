@@ -1,0 +1,71 @@
+{% load static i18n %}
+<div id="sidebar">
+  <div class="left-bar">
+    <div class="left-bar-item" onclick="showContent()">
+      <div class="left-bar-item-text">{% translate "project" %}</div>
+      <img
+        class="left-bar-item-icon"
+        src="{% static 'images/icons/projectDirectory.svg' %}"
+        alt=""
+      />
+    </div>
+  </div>
+  <div class="sidebar-content" style="display: none">
+    <div class="sidebar-header">
+      <img src="{% static 'images/icons/menu-open.svg' %}" alt=""/>
+      <p>{% translate "project" %}</p>
+    </div>
+    <div class="sidebar-first-header sidebar-item" onclick="OpenClose('sidebar-first-header-icon', 'sidebar-items')">
+      <img
+        class="sidebar-first-header-icon"
+        src="{% static 'images/icons/play_forward.svg' %}"
+        alt=""
+      />
+      <img src="{% static 'images/icons/menu-open.svg' %}" alt=""/>
+      <p class="sidebar-item-link">portfolio</p>
+    </div>
+    <div class="sidebar-items" style="display: none;">
+      {% for page in pages %}
+        {% if page.is_parent %}
+          <div class="sidebar-project-items">
+            <div class="sidebar-projects-head" onclick="OpenClose('sidebar-projects-icon', 'sidebar-projects-content')">
+              <img
+                class="sidebar-projects-icon"
+                src="{% static 'images/icons/play_forward.svg' %}"
+                alt=""
+              />
+              <img src="{{ page.icon.url }}" alt=""/>
+              <a href="{% url 'projects' %}" class="sidebar-item-link">{{ page.title }}</a>
+            </div>
+            <div class="sidebar-projects-content" style="display: none;">
+              <div class="sidebar-projects-items">
+                {% for child in page.children.all %}
+                  <div class="sidebar-item sidebar-project-item">
+                    <img
+                      class="sidebar-item-icon sidebar-project-icon"
+                      src="{{ child.icon.url }}"
+                      alt=""
+                    />
+                    <a class="sidebar-item-link sidebar-project-link" href="{% url 'project' slug=child.slug %}">{{ child.title }}</a>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        {% else %}
+          {% if not page.parent %}
+            <div class="sidebar-item">
+              <img
+                class="sidebar-item-icon"
+                src="{{ page.icon.url }}"
+                alt=""
+              />
+              <a class="sidebar-item-link" href="/{{ page.slug }}">{{ page.title }}</a>
+            </div>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+
+    </div>
+  </div>
+</div>

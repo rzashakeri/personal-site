@@ -1,0 +1,9 @@
+<div class="social-media">
+  {% for social_media in social_medias %}
+    <a href="{{ social_media.link }}">
+      <div class="social-media-item">
+        <img width="12" src="{{ social_media.icon.url }}" alt="{{ social_media.name }}">
+      </div>
+    </a>
+  {% endfor %}
+</div>

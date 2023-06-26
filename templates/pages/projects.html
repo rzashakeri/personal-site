@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static i18n %}
+{% load static %}
+{% block extra_javascript %}
+  <script type="text/javascript" src="{% static 'js/projects.js' %}"></script>
+{% endblock %}
+{% block title %}Reza Shakeri | {% translate "projects" %}{% endblock %}
+{% block social_media %}{% endblock %}
+{% block main_top_bar %}
+  {% include 'shared/partials/main_top_bar.html' %}
+{% endblock %}
+{% block content %}
+  <div class="projects">
+    <div class="projects-head">
+      <h1 class="projects-head-text">{% translate "Projects" %}</h1>
+    </div>
+    <div class="projects-content">
+      {% for project in projects %}
+        <div class="card rounded">
+          <div class="card-overlay">
+          </div>
+          <div class="card-heading">
+            <div class="badges">
+              <div class="badge github-stars-badge">
+                <i class="fa fa-star fa-fade" aria-hidden="true"></i>
+                <span>stars: {{ project.star_count }}</span>
+              </div>
+              <div class="badge github-forks-badge">
+                <i class="fa fa-code-fork" aria-hidden="true"></i>
+                <span>fork: {{ project.fork_count }}</span>
+              </div>
+            </div>
+            <span class="card-heading-title small"><a class="card-heading-link" href="{% url 'project' slug=project.slug %}">{{ project.name }}</a></span>
+            <h2 class="card-heading-description">{{ project.short_description}}</h2>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock content %}

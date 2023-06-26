@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_javascript %}
+  <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+{% endblock %}
+{% block title %}Reza Shakeri | {{ page.title }}{% endblock %}
+{% block main_top_bar %}
+  {% include 'shared/partials/main_top_bar.html' %}
+{% endblock %}
+{% block content %}
+  <div class="project">
+    <div class="project-details">
+      <div class="project-head">
+        <div class="project-badges">
+          <div class="project-badge project-github-star">
+            <i class="fa fa-star fa-fade" aria-hidden="true"></i>
+            <span>stars: {{ project.star_count }}</span>
+          </div>
+          <div class="project-badge project-github-fork">
+            <i class="fa fa-code-fork" aria-hidden="true"></i>
+            <span>fork: {{ project.fork_count }}</span>
+          </div>
+        </div>
+        <h1 class="project-title">{{ project.name }}</h1>
+      </div>
+      <div class="project-content">
+        <div class="project-description">
+          {{ project.description|safe }}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

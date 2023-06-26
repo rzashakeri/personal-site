@@ -1,0 +1,75 @@
+{% load static i18n compress render_partial %}<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>{% block title %}{% endblock title %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="My Pycharm Portfolio">
+  <meta name="author" content="Reza Shakeri">
+  {% include 'shared/references/header.html' %}
+  <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}">
+
+  {% compress css %}
+    {% block css %}
+    {% endblock %}
+  {% endcompress %}
+
+  <!-- Le javascript
+  ================================================== -->
+  {# Placed at the top of the document so pages load faster with defer #}
+  {% compress js %}
+    {% block javascript %}
+    {% endblock javascript %}
+  {% endcompress %}
+
+</head>
+<body>
+{% if messages %}
+  {% for message in messages %}
+    <div class="top-bar">
+      <div class="top-bar-content">
+        <div class="top-bar-icon">
+          <i class="{{ message.tags }}" style="color: #ffffff;"></i>
+        </div>
+        <p class="top-bar-text">{{ message }}</p>
+      </div>
+      <span id="top-bar-close" onclick="this.parentNode.remove(); return false;">
+        <i class="fa-solid fa-xmark fa-xl" style="color: #ffffff; cursor: pointer;"></i>
+      </span>
+    </div>
+  {% endfor %}
+{% endif %}
+{% include 'shared/header.html' %}
+<main class="main">
+  <div id="wrapper">
+    <div id="container">
+      {% render_partial 'pages.views.SideBarView' %}
+      <div id="resizer"></div>
+      <div id="main">
+        {% block social_media %}{% endblock %}
+        {% block main_top_bar %}{% endblock %}
+        <div id="main-content" {% if request.resolver_match.url_name == "home" %}style="overflow: hidden;"{% endif %}>
+          {% block content %}
+          {% endblock %}
+        </div>
+      </div>
+      {% include 'shared/footer.html' %}
+    </div>
+  </div>
+</main>
+{% include 'shared/references/footer.html' %}
+{% block extra_javascript %}{% endblock %}
+{% block inline_javascript %}
+  {% comment %}
+    Script tags with only code, no src (defer by default). To run
+    with a "defer" so that you run inline code:
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {/* Run whatever you want */});
+    </script>
+    {% endcomment %}
+{% endblock inline_javascript %}
+{% block modal %}{% endblock modal %}
+</body>
+</html>
