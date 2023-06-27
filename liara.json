@@ -1,0 +1,11 @@
+{
+  "django": {
+    "pythonVersion": "3.8"
+  },
+  "disks": [
+    {
+      "name": "media",
+      "mountTo": "media"
+    }
+  ]
+}
