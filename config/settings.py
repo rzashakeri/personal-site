@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 import environ
 from dotenv import load_dotenv
@@ -30,12 +30,12 @@ if READ_DOT_ENV_FILE:
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("DJANGO_SECRET_KEY")
+SECRET_KEY = env("DJANGO_SECRET_KEY", default="secretkey")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DJANGO_DEBUG", False)
 
-ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["rezashakeri.com"])
+ALLOWED_HOSTS = env("DJANGO_ALLOWED_HOSTS", default="[rezashakeri.com]")
 
 # Application definition
 
@@ -48,6 +48,8 @@ INSTALLED_APPS = [
 	"django.contrib.staticfiles",
 	"django_render_partial",
 	"ckeditor",
+	"storages",
+	"pages"
 ]
 
 MIDDLEWARE = [
@@ -58,6 +60,7 @@ MIDDLEWARE = [
 	"django.contrib.auth.middleware.AuthenticationMiddleware",
 	"django.contrib.messages.middleware.MessageMiddleware",
 	"django.middleware.clickjacking.XFrameOptionsMiddleware",
+	"django.middleware.security.SecurityMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -74,6 +77,10 @@ TEMPLATES = [
 				"django.template.context_processors.request",
 				"django.contrib.auth.context_processors.auth",
 				"django.contrib.messages.context_processors.messages",
+				"django.template.context_processors.i18n",
+				"django.template.context_processors.media",
+				"django.template.context_processors.static",
+				"django.template.context_processors.tz",
 			],
 		},
 	},
@@ -90,8 +97,6 @@ DATABASES = {
 		default="postgres://localhost/portfolio",
 	),
 }
-DATABASES["default"]["ATOMIC_REQUESTS"] = True
-DATABASES["default"]["CONN_MAX_AGE"] = env.int("CONN_MAX_AGE", default=60)  # noqa: F405
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -125,13 +130,36 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
 
+LIARA_ENDPOINT = env("DJANGO_LIARA_ENDPOINT", default="storage.iran.liara.space")
+LIARA_BUCKET_NAME = env("DJANGO_LIARA_BUCKET_NAME", default="rezashakeri")
+LIARA_ACCESS_KEY = env("DJANGO_LIARA_ACCESS_KEY", default="LIARA_ACCESS_KEY not set")
+LIARA_SECRET_KEY = env("DJANGO_LIARA_SECRET_KEY", default="LIARA_SECRET_KEY not set")
+
+AWS_S3_ENDPOINT_URL = "https://" + LIARA_ENDPOINT
+AWS_STORAGE_BUCKET_NAME = LIARA_BUCKET_NAME
+AWS_ACCESS_KEY_ID = LIARA_ACCESS_KEY
+AWS_SECRET_ACCESS_KEY = LIARA_SECRET_KEY
+AWS_S3_OBJECT_PARAMETERS = {
+	'CacheControl': 'max-age=86400',
+}
+AWS_LOCATION = 'static'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
 # STATIC
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-root
-STATIC_ROOT = str(BASE_DIR / "staticfiles")
+STATIC_ROOT = "static/"
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = "/static/"
+# https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
+STATICFILES_DIRS = [
+	os.path.join(BASE_DIR, "static"),
+]
 
+STATICFILES_FINDERS = [
+	"django.contrib.staticfiles.finders.FileSystemFinder",
+	"django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
 # MEDIA
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#media-root
@@ -156,22 +184,21 @@ EMAIL_TIMEOUT = 5
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#default-from-email
 DEFAULT_FROM_EMAIL = env(
-    "DJANGO_DEFAULT_FROM_EMAIL",
-    default="portfolio <noreply@rezashakeri.com>",
+	"DJANGO_DEFAULT_FROM_EMAIL",
+	default="portfolio <noreply@rezashakeri.com>",
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#server-email
 SERVER_EMAIL = env("DJANGO_SERVER_EMAIL", default=DEFAULT_FROM_EMAIL)
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-subject-prefix
 EMAIL_SUBJECT_PREFIX = env(
-    "DJANGO_EMAIL_SUBJECT_PREFIX",
-    default="[portfolio]",
+	"DJANGO_EMAIL_SUBJECT_PREFIX",
+	default="[portfolio]",
 )
-
 
 # ADMIN
 # ------------------------------------------------------------------------------
 # Django Admin URL.
-ADMIN_URL = env("DJANGO_ADMIN_URL")
+ADMIN_URL = env("DJANGO_ADMIN_URL", default="admin/")
 # https://docs.djangoproject.com/en/dev/ref/settings/#admins
 ADMINS = [("""Reza Shakeri""", "mail@rezashakeri.com")]
 # https://docs.djangoproject.com/en/dev/ref/settings/#managers
@@ -201,7 +228,7 @@ LOGGING = {
 }
 
 # ckeditor config
-CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+CKEDITOR_BASEPATH = "https://storage.iran.liara.space/rezashakeri/static/ckeditor/ckeditor/"
 
 CKEDITOR_CONFIGS = {
 	'default': {
