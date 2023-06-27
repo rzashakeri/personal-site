@@ -5,3 +5,7 @@ django-ckeditor==6.5.1 # https://github.com/django-ckeditor/django-ckeditor
 django-environ==0.10.0  # https://github.com/joke2k/django-environ
 django-debug-toolbar==4.1.0  # https://github.com/jazzband/django-debug-toolbar
 psycopg2-binary
+Pillow==9.5.0
+whitenoise==6.5.0
+boto3==1.26.160
+django-storages==1.13.2
