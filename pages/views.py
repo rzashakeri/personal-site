@@ -5,8 +5,8 @@ from django.urls import reverse
 from django.views import View
 from django.views.generic import TemplateView
 
-from portfolio.pages.forms import ContactUsModelForm
-from portfolio.pages.models import SiteSettings, Page, About, ContactUs, Project, SkillCategory, SocialMedia
+from pages.forms import ContactUsModelForm
+from pages.models import SiteSettings, Page, About, ContactUs, Project, SkillCategory, SocialMedia
 
 
 class HomeView(View):
@@ -85,7 +85,7 @@ class ProjectView(View):
 class SkillsView(View):
     def get(self, request):
         page = Page.objects.get(slug="skills")
-        skill_category = SkillCategory.objects.all()
+        skill_category = SkillCategory.objects.all().order_by('name')
         context = {
             "page": page,
             "skill_category": skill_category
