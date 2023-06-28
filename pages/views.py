@@ -53,7 +53,7 @@ class ContactUsView(View):
         if contact_us_form.is_valid():
             contact_us_form.save()
             messages.success(request, 'Message sent successfully', extra_tags='fa-sharp fa-solid fa-square-check fa-xl')
-            return render(request, "pages/contact.html", context=context)
+            return redirect(reverse('home'))
         return render(request, "pages/contact.html", context=context)
 
 
