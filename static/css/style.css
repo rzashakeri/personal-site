@@ -701,7 +701,6 @@ table {
 .about-section {
     display: flex;
     flex-direction: column;
-    gap: 30px;
     margin: 3rem 1rem;
     padding: 0 10rem;
 }
@@ -726,6 +725,21 @@ table {
 
 .about-description a {
     text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .about-section {
+        margin: 3rem 0;
+        padding: 0 5rem;
+    }
+
+    .about-title {
+        font-size: 2rem;
+    }
+
+    .about-description {
+        font-size: 1rem;
+    }
 }
 
 
