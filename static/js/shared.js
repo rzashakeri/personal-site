@@ -59,25 +59,3 @@ window.addEventListener("blur", () => {
 window.addEventListener("focus", () => {
     document.title = docTitle;
 });
-
-$(window).keydown(function (e) {
-    switch (e.keyCode) {
-        case 17:
-        case 65:
-            window.open('about-us', '_self', false);
-            break;
-        case 17:
-        case 83:
-            window.open('skills', '_self', false);
-            break;
-        case 17:
-        case 80:
-            window.open('projects', '_self', false);
-            break;
-        case 17:
-        case 72:
-            window.open('', '_self', false);
-            break;
-    }
-    return;
-});

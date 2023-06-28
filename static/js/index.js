@@ -23,3 +23,19 @@ function ReadMoreAboutText() {
         moreText.style.display = "inline";
     }
 }
+
+
+document.onkeydown = keydown;
+function keydown(evt) {
+
+    if (!evt) evt = event;
+    if (evt.ctrlKey && evt.keyCode === 65) {
+        window.open('about-us', '_self', false);
+    } else if (evt.ctrlKey && evt.keyCode === 83) {
+        window.open('skills', '_self', false);
+    } else if (evt.ctrlKey && evt.keyCode === 80) {
+        window.open('projects', '_self', false);
+    } else if (evt.ctrlKey && evt.keyCode === 72) {
+        window.open('', '_self', false);
+    }
+}
