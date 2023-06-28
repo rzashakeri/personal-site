@@ -1,4 +1,4 @@
-# pycharm portfolio
+# Pycharm Portfolio
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![PyCharm](https://img.shields.io/badge/pycharm-143?style=for-the-badge&logo=pycharm&logoColor=black&color=black&labelColor=green)
@@ -9,3 +9,23 @@ https://github.com/rzashakeri/pycharm-portfolio/assets/62311769/f3d5ffba-2712-43
 
 
 a web application for portfolios made with the Django framework
+
+
+## Stack
+1. HTML 
+2. CSS
+3. JavaScript
+4. Python
+5. Django
+6. PostgreSQL
+7. Redis
+
+## Theme
+
+You can access the pure Pycharm Portfolio theme with [this link](https://github.com/rzashakeri/pycharm-portfolio-theme)
+
+
+## cookiecutter 
+
+I Created pycharm portfolio with django-cookiecutter which you can
+access with [this link](https://github.com/rzashakeri/pycharm-portfolio-cookiecutter)
