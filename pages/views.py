@@ -128,8 +128,8 @@ def render_social_media(request):
 
 
 def render_footer(request):
-	settings = SiteSettings.objects.first()
+	site = SiteSettings.objects.first()
 	context = {
-		'settings': settings
+		'site': site
 	}
 	return render(request, 'shared/footer.html', context=context)
