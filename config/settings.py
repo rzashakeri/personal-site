@@ -23,8 +23,8 @@ env = environ.Env()
 
 READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=False)
 if READ_DOT_ENV_FILE:
-	# OS environment variables take precedence over variables from .env
-	env.read_env(str(BASE_DIR / ".env"))
+    # OS environment variables take precedence over variables from .env
+    env.read_env(str(BASE_DIR / ".env"))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -35,55 +35,55 @@ SECRET_KEY = env("DJANGO_SECRET_KEY", default="secretkey")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DJANGO_DEBUG", False)
 
-ALLOWED_HOSTS = env("DJANGO_ALLOWED_HOSTS", default="[rezashakeri.com]")
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
 INSTALLED_APPS = [
-	"django.contrib.admin",
-	"django.contrib.auth",
-	"django.contrib.contenttypes",
-	"django.contrib.sessions",
-	"django.contrib.messages",
-	"django.contrib.staticfiles",
-	"django_render_partial",
-	"ckeditor",
-	"storages",
-	"pages"
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "django_render_partial",
+    "ckeditor",
+    "storages",
+    "pages"
 ]
 
 MIDDLEWARE = [
-	"django.middleware.security.SecurityMiddleware",
-	"django.contrib.sessions.middleware.SessionMiddleware",
-	"django.middleware.common.CommonMiddleware",
-	"django.middleware.csrf.CsrfViewMiddleware",
-	"django.contrib.auth.middleware.AuthenticationMiddleware",
-	"django.contrib.messages.middleware.MessageMiddleware",
-	"django.middleware.clickjacking.XFrameOptionsMiddleware",
-	"django.middleware.security.SecurityMiddleware",
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.security.SecurityMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
 
 TEMPLATES = [
-	{
-		"BACKEND": "django.template.backends.django.DjangoTemplates",
-		"DIRS": [BASE_DIR / 'templates']
-		,
-		"APP_DIRS": True,
-		"OPTIONS": {
-			"context_processors": [
-				"django.template.context_processors.debug",
-				"django.template.context_processors.request",
-				"django.contrib.auth.context_processors.auth",
-				"django.contrib.messages.context_processors.messages",
-				"django.template.context_processors.i18n",
-				"django.template.context_processors.media",
-				"django.template.context_processors.static",
-				"django.template.context_processors.tz",
-			],
-		},
-	},
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [BASE_DIR / 'templates']
+        ,
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.i18n",
+                "django.template.context_processors.media",
+                "django.template.context_processors.static",
+                "django.template.context_processors.tz",
+            ],
+        },
+    },
 ]
 
 WSGI_APPLICATION = "config.wsgi.application"
@@ -92,28 +92,28 @@ WSGI_APPLICATION = "config.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-	"default": env.db(
-		"DATABASE_URL",
-		default="postgres://localhost/portfolio",
-	),
+    "default": env.db(
+        "DATABASE_URL",
+        default="postgres://localhost/portfolio",
+    ),
 }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-	{
-		"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-	},
-	{
-		"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-	},
-	{
-		"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-	},
-	{
-		"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-	},
+    {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    },
 ]
 
 # Internationalization
@@ -132,15 +132,15 @@ SITE_ID = 1
 
 LIARA_ENDPOINT = env("DJANGO_LIARA_ENDPOINT", default="storage.iran.liara.space")
 LIARA_BUCKET_NAME = env("DJANGO_LIARA_BUCKET_NAME", default="rezashakeri")
-LIARA_ACCESS_KEY = env("DJANGO_LIARA_ACCESS_KEY", default="LIARA_ACCESS_KEY not set")
-LIARA_SECRET_KEY = env("DJANGO_LIARA_SECRET_KEY", default="LIARA_SECRET_KEY not set")
+LIARA_ACCESS_KEY = env("DJANGO_LIARA_ACCESS_KEY", default="bdl2fof5hlrhg479")
+LIARA_SECRET_KEY = env("DJANGO_LIARA_SECRET_KEY", default="dc540adc-4405-467b-b0fe-96ca680f063c")
 
 AWS_S3_ENDPOINT_URL = "https://" + LIARA_ENDPOINT
 AWS_STORAGE_BUCKET_NAME = LIARA_BUCKET_NAME
 AWS_ACCESS_KEY_ID = LIARA_ACCESS_KEY
 AWS_SECRET_ACCESS_KEY = LIARA_SECRET_KEY
 AWS_S3_OBJECT_PARAMETERS = {
-	'CacheControl': 'max-age=86400',
+    'CacheControl': 'max-age=86400',
 }
 AWS_LOCATION = 'static'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
@@ -153,12 +153,11 @@ STATIC_ROOT = "static/"
 STATIC_URL = "/static/"
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = [
-	os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "static"),
 ]
-
 STATICFILES_FINDERS = [
-	"django.contrib.staticfiles.finders.FileSystemFinder",
-	"django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 # MEDIA
 # ------------------------------------------------------------------------------
@@ -176,23 +175,23 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 EMAIL_BACKEND = env(
-	"DJANGO_EMAIL_BACKEND",
-	default="django.core.mail.backends.smtp.EmailBackend",
+    "DJANGO_EMAIL_BACKEND",
+    default="django.core.mail.backends.smtp.EmailBackend",
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-timeout
 EMAIL_TIMEOUT = 5
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#default-from-email
 DEFAULT_FROM_EMAIL = env(
-	"DJANGO_DEFAULT_FROM_EMAIL",
-	default="portfolio <noreply@rezashakeri.com>",
+    "DJANGO_DEFAULT_FROM_EMAIL",
+    default="portfolio <noreply@rezashakeri.com>",
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#server-email
 SERVER_EMAIL = env("DJANGO_SERVER_EMAIL", default=DEFAULT_FROM_EMAIL)
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-subject-prefix
 EMAIL_SUBJECT_PREFIX = env(
-	"DJANGO_EMAIL_SUBJECT_PREFIX",
-	default="[portfolio]",
+    "DJANGO_EMAIL_SUBJECT_PREFIX",
+    default="[portfolio]",
 )
 
 # ADMIN
@@ -210,100 +209,100 @@ MANAGERS = ADMINS
 # See https://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
 LOGGING = {
-	"version": 1,
-	"disable_existing_loggers": False,
-	"formatters": {
-		"verbose": {
-			"format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s",
-		},
-	},
-	"handlers": {
-		"console": {
-			"level": "DEBUG",
-			"class": "logging.StreamHandler",
-			"formatter": "verbose",
-		}
-	},
-	"root": {"level": "INFO", "handlers": ["console"]},
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s",
+        },
+    },
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        }
+    },
+    "root": {"level": "INFO", "handlers": ["console"]},
 }
 
 # ckeditor config
 CKEDITOR_BASEPATH = "https://storage.iran.liara.space/rezashakeri/static/ckeditor/ckeditor/"
 
 CKEDITOR_CONFIGS = {
-	'default': {
-		'skin': 'moono-lisa',
-		# 'skin': 'office2013',
-		'toolbar_Basic': [
-			['Source', '-', 'Bold', 'Italic']
-		],
-		'toolbar_YourCustomToolbarConfig': [
-			{'name': 'document', 'items': ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates']},
-			{'name': 'clipboard', 'items': ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
-			{'name': 'editing', 'items': ['Find', 'Replace', '-', 'SelectAll']},
-			{'name': 'forms',
-			 'items': ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton',
-			           'HiddenField']},
-			'/',
-			{'name': 'basicstyles',
-			 'items': ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']},
-			{'name': 'paragraph',
-			 'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-',
-			           'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl',
-			           'Language']},
-			{'name': 'links', 'items': ['Link', 'Unlink', 'Anchor']},
-			{'name': 'insert',
-			 'items': ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe']},
-			'/',
-			{'name': 'styles', 'items': ['Styles', 'Format', 'Font', 'FontSize']},
-			{'name': 'colors', 'items': ['TextColor', 'BGColor']},
-			{'name': 'tools', 'items': ['Maximize', 'ShowBlocks']},
-			{'name': 'about', 'items': ['About']},
-			'/',  # put this to force next toolbar on new line
-			{'name': 'yourcustomtools', 'items': [
-				# put the name of your editor.ui.addButton here
-				'Preview',
-				'Maximize',
-			
-			]},
-		],
-		'toolbar': 'YourCustomToolbarConfig',  # put selected toolbar config here
-		# 'toolbarGroups': [{ 'name': 'document', 'groups': [ 'mode', 'document', 'doctools' ] }],
-		# 'height': 291,
-		# 'width': '100%',
-		# 'filebrowserWindowHeight': 725,
-		# 'filebrowserWindowWidth': 940,
-		# 'toolbarCanCollapse': True,
-		# 'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
-		'tabSpaces': 4,
-		'extraPlugins': ','.join([
-			'uploadimage',  # the upload image feature
-			# your extra plugins here
-			'div',
-			'autolink',
-			'autoembed',
-			'embedsemantic',
-			'autogrow',
-			# 'devtools',
-			'widget',
-			'lineutils',
-			'clipboard',
-			'dialog',
-			'dialogui',
-			'elementspath',
-		]),
-	}
+    'default': {
+        'skin': 'moono-lisa',
+        # 'skin': 'office2013',
+        'toolbar_Basic': [
+            ['Source', '-', 'Bold', 'Italic']
+        ],
+        'toolbar_YourCustomToolbarConfig': [
+            {'name': 'document', 'items': ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates']},
+            {'name': 'clipboard', 'items': ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
+            {'name': 'editing', 'items': ['Find', 'Replace', '-', 'SelectAll']},
+            {'name': 'forms',
+             'items': ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton',
+                       'HiddenField']},
+            '/',
+            {'name': 'basicstyles',
+             'items': ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']},
+            {'name': 'paragraph',
+             'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-',
+                       'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl',
+                       'Language']},
+            {'name': 'links', 'items': ['Link', 'Unlink', 'Anchor']},
+            {'name': 'insert',
+             'items': ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe']},
+            '/',
+            {'name': 'styles', 'items': ['Styles', 'Format', 'Font', 'FontSize']},
+            {'name': 'colors', 'items': ['TextColor', 'BGColor']},
+            {'name': 'tools', 'items': ['Maximize', 'ShowBlocks']},
+            {'name': 'about', 'items': ['About']},
+            '/',  # put this to force next toolbar on new line
+            {'name': 'yourcustomtools', 'items': [
+                # put the name of your editor.ui.addButton here
+                'Preview',
+                'Maximize',
+            
+            ]},
+        ],
+        'toolbar': 'YourCustomToolbarConfig',  # put selected toolbar config here
+        # 'toolbarGroups': [{ 'name': 'document', 'groups': [ 'mode', 'document', 'doctools' ] }],
+        # 'height': 291,
+        # 'width': '100%',
+        # 'filebrowserWindowHeight': 725,
+        # 'filebrowserWindowWidth': 940,
+        # 'toolbarCanCollapse': True,
+        # 'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
+        'tabSpaces': 4,
+        'extraPlugins': ','.join([
+            'uploadimage',  # the upload image feature
+            # your extra plugins here
+            'div',
+            'autolink',
+            'autoembed',
+            'embedsemantic',
+            'autogrow',
+            # 'devtools',
+            'widget',
+            'lineutils',
+            'clipboard',
+            'dialog',
+            'dialogui',
+            'elementspath',
+        ]),
+    }
 }
 
 CACHES = {
-	"default": {
-		"BACKEND": "django_redis.cache.RedisCache",
-		"LOCATION": env("REDIS_URL"),
-		"OPTIONS": {
-			"CLIENT_CLASS": "django_redis.client.DefaultClient",
-			# Mimicing memcache behavior.
-			# https://github.com/jazzband/django-redis#memcached-exceptions-behavior
-			"IGNORE_EXCEPTIONS": True,
-		},
-	}
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": env("REDIS_URL", default="redis://127.0.0.1:6379/1"),
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            # Mimicing memcache behavior.
+            # https://github.com/jazzband/django-redis#memcached-exceptions-behavior
+            "IGNORE_EXCEPTIONS": True,
+        },
+    }
 }
