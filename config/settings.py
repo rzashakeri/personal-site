@@ -130,20 +130,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
 
-LIARA_ENDPOINT = env("DJANGO_LIARA_ENDPOINT", default="storage.iran.liara.space")
-LIARA_BUCKET_NAME = env("DJANGO_LIARA_BUCKET_NAME", default="rezashakeri")
-LIARA_ACCESS_KEY = env("DJANGO_LIARA_ACCESS_KEY", default="bdl2fof5hlrhg479")
-LIARA_SECRET_KEY = env("DJANGO_LIARA_SECRET_KEY", default="dc540adc-4405-467b-b0fe-96ca680f063c")
-
-AWS_S3_ENDPOINT_URL = "https://" + LIARA_ENDPOINT
-AWS_STORAGE_BUCKET_NAME = LIARA_BUCKET_NAME
-AWS_ACCESS_KEY_ID = LIARA_ACCESS_KEY
-AWS_SECRET_ACCESS_KEY = LIARA_SECRET_KEY
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-}
-AWS_LOCATION = 'static'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # STATIC
 # ------------------------------------------------------------------------------
@@ -229,7 +215,7 @@ LOGGING = {
 }
 
 # ckeditor config
-CKEDITOR_BASEPATH = "https://storage.iran.liara.space/rezashakeri/static/ckeditor/ckeditor/"
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 
 CKEDITOR_CONFIGS = {
     'default': {
