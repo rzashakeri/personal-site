@@ -10,3 +10,4 @@ whitenoise==6.5.0
 boto3==1.26.160
 django-storages==1.13.2
 django-redis==5.3.0
+gunicorn
