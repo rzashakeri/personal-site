@@ -934,7 +934,7 @@ table {
 .card-heading h2 {
     margin: 5px 0;
     transform: translateZ(30px);
-    width: 180px;
+    width: 85%;
     font-family: 'Open Sans', sans-serif;
     line-height: 2.2rem;
     font-weight: 400;
@@ -959,6 +959,19 @@ table {
     color: var(--color-text-secondary);
 }
 
+@media (max-width: 768px) {
+    .card-heading h2 {
+        width: 75%;
+    }
+}
+
+
+@media (max-width: 320px) {
+    .card-heading h2 {
+        font-size: 1.2rem;
+    }
+}
+
 /* ================================================ */
 /* badges */
 /* ================================================ */
@@ -974,6 +987,13 @@ table {
     background-color: var(--color-text-grey);
     border-radius: 5px;
     padding: 5px;
+}
+
+@media (max-width: 320px) {
+    .badges:nth-child(2) {
+        display: none;
+    }
+
 }
 
 /* ================================================ */
