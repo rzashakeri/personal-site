@@ -1,6 +1,6 @@
 {
   "django": {
-    "pythonVersion": "3.8",
+    "pythonVersion": "3.10",
     "settingsFile": "./config/settings/production.py"
   },
   "disks": [
