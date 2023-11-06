@@ -72,6 +72,8 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
+    "django.forms"
 ]
 THIRD_PARTY_APPS = [
     "django_render_partial",
