@@ -40,12 +40,12 @@ function OpenClose(elementClass, SidebarItemsClass) {
     if (element.className === elementClass) {
         element.setAttribute(
             "src",
-            "/static/images/icons/findAndShowNextMatches.svg"
+            "https://storage.iran.liara.space/public-static-rezashakeri/static/images/icons/findAndShowNextMatches.svg"
         );
         element.className += " open";
         sidebarItems.removeAttribute("style");
     } else {
-        element.setAttribute("src", "/static/images/icons/play_forward.svg");
+        element.setAttribute("src", "https://storage.iran.liara.space/public-static-rezashakeri/static/images/icons/play_forward.svg");
         element.className = elementClass;
         sidebarItems.setAttribute("style", "display: none;");
     }
