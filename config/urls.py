@@ -9,7 +9,7 @@ urlpatterns = [
     path("", include("pages.urls")),
     path("about/", TemplateView.as_view(template_name="pages/about.html"), name="about"),
     # Django Admin, use {% url 'admin:index' %}
-    path(settings.ADMIN_URL, admin.site.urls),
+    path('admin/', admin.site.urls),
     # Your stuff: custom urls includes go here
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
