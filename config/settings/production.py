@@ -40,8 +40,6 @@ LANGUAGE_CODE = "en-us"
 SITE_ID = 1
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
 USE_I18N = True
-# https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
-USE_TZ = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#locale-paths
 LOCALE_PATHS = [str(BASE_DIR / "locale")]
 
@@ -80,6 +78,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     "django_render_partial",
     "ckeditor",
+    "admin_honeypot",
 ]
 
 LOCAL_APPS = [
