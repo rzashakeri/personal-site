@@ -1,16 +1,20 @@
 {% extends "base.html" %}
+
 {% load static %}
 
 {% block title %}Server Error{% endblock %}
+
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/500.css' %}">
 {% endblock %}
+
+{% block extra_javascript %}
+    <script src="{% static 'js/error-500.js' %}"></script>
+{% endblock %}
+
 {% block content %}
     <div id="error-500">
         <h1>500</h1>
         <div id="console"></div>
     </div>
-    {% block javascript %}
-        <script src="{% static 'js/error-500.js' %}"></script>
-    {% endblock javascript %}
-{% endblock content %}
+{% endblock %}
