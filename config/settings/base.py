@@ -79,6 +79,7 @@ THIRD_PARTY_APPS = [
     "django_render_partial",
     "ckeditor",
     "storages",
+    "admin_honeypot",
 ]
 
 LOCAL_APPS = [
