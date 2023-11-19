@@ -5,11 +5,15 @@ from django.urls import include, path
 from django.views import defaults as default_views
 from django.views.generic import TemplateView
 
+from config.settings.production import ADMIN_URL
+
+
 urlpatterns = [
     path("", include("pages.urls")),
     path("about/", TemplateView.as_view(template_name="pages/about.html"), name="about"),
     # Django Admin, use {% url 'admin:index' %}
-    path('admin/', admin.site.urls),
+    path('admin/', include('admin_honeypot.urls')),
+    path(ADMIN_URL, admin.site.urls),
     # Your stuff: custom urls includes go here
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
