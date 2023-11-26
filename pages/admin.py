@@ -4,7 +4,7 @@ from pages.models import Page, About, SkillCategory, Skill, ContactUs, Project, 
 
 admin.site.register(SiteSettings)
 
-
+@admin.register(Page)
 class PageAdmin(admin.ModelAdmin):
     list_display = ["title", "parent", "is_parent"]
     list_filter = ["is_parent"]
@@ -12,33 +12,30 @@ class PageAdmin(admin.ModelAdmin):
     search_fields = ["title"]
 
 
-admin.site.register(Page, PageAdmin)
 
-
+@admin.register(About)
 class AboutAdmin(admin.ModelAdmin):
     list_display = ["page", "heading"]
     search_fields = ["title"]
 
 
-admin.site.register(About, AboutAdmin)
 
-
+@admin.register(SkillCategory)
 class SkillCategoryAdmin(admin.ModelAdmin):
     list_display = ["name"]
     ordering = ["name"]
     search_fields = ["name"]
 
 
-admin.site.register(SkillCategory, SkillCategoryAdmin)
 
-
+@admin.register(Skill)
 class SkillAdmin(admin.ModelAdmin):
     list_display = ["category", "name"]
     ordering = ["name"]
     search_fields = ["name"]
 
 
-admin.site.register(Skill, SkillAdmin)
+
 
 admin.site.register(ContactUs)
 admin.site.register(Project)
