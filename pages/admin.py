@@ -49,7 +49,8 @@ class ProjectAdmin(admin.ModelAdmin):
     search_fields = ["name"]
 
 
+@admin.register(SocialMedia)
+class SocialMediaAdmin(admin.ModelAdmin):
+    pass
 
-
-admin.site.register(SocialMedia)
 admin.site.register(Education)
