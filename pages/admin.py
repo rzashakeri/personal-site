@@ -6,10 +6,19 @@ admin.site.register(SiteSettings)
 
 class PageAdmin(admin.ModelAdmin):
     list_display = ["title", "parent", "is_parent"]
+    list_filter = ["is_parent"]
+    ordering = ["is_parent"]
+    search_fields = ["title"]
 
 admin.site.register(Page, PageAdmin)
-admin.site.register(About)
-admin.site.register(SkillCategory)
+
+class AboutAdmin(admin.ModelAdmin):
+    list_display = ["page", "heading"]
+    search_fields = ["title"]
+
+admin.site.register(About, AboutAdmin)
+
+
 admin.site.register(Skill)
 admin.site.register(ContactUs)
 admin.site.register(Project)
