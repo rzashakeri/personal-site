@@ -81,6 +81,7 @@ THIRD_PARTY_APPS = [
     "django_render_partial",
     "ckeditor",
     "admin_honeypot",
+    "captcha",
 ]
 
 LOCAL_APPS = [
