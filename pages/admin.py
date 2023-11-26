@@ -53,4 +53,11 @@ class ProjectAdmin(admin.ModelAdmin):
 class SocialMediaAdmin(admin.ModelAdmin):
     pass
 
-admin.site.register(Education)
+
+@admin.register(Education)
+class EducationAdmin(admin.ModelAdmin):
+    list_display = ["Degree", "School", "country", "city", "start_date", "end_date", "present"]
+    list_filter = ["start_date"]
+    ordering = ["Degree"]
+    search_fields = ["School"]
+
