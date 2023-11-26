@@ -1,42 +1,48 @@
 {% extends "base.html" %}
 {% load static i18n %}
 {% block extra_javascript %}
-  <script type="text/javascript" src="{% static 'js/contact.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/contact.js' %}"></script>
 {% endblock %}
 {% block title %}Reza Shakeri | {% translate "contact us" %}{% endblock %}
 {% block social_media %}{% endblock %}
 {% block main_top_bar %}
-  {% include 'shared/partials/main_top_bar.html' %}
+    {% include 'shared/partials/main_top_bar.html' %}
 {% endblock %}
 {% block content %}
-  <div class="contact-us">
-    <form class="contact-us-form" method="POST" action="">
-      {% csrf_token %}
-      <div class="contact-us-form-field first-name-form">
-        <label for="first_name">{% translate "first name" %}</label>
-        {{ contact_us_form.first_name }}
-        {{ contact_us_form.first_name.errors }}
-      </div>
+    <div class="contact-us">
+        <form class="contact-us-form" method="POST" action="">
+            {% csrf_token %}
+            <div class="contact-us-form-field first-name-form">
+                <label for="first_name">{% translate "first name" %}</label>
+                {{ contact_us_form.first_name }}
+                {{ contact_us_form.first_name.errors }}
+            </div>
 
-      <div class="contact-us-form-field last-name-form">
-        <label for="last_name">{% translate "last name" %}</label>
-        {{ contact_us_form.last_name }}
-        {{ contact_us_form.last_name.errors }}
-      </div>
+            <div class="contact-us-form-field last-name-form">
+                <label for="last_name">{% translate "last name" %}</label>
+                {{ contact_us_form.last_name }}
+                {{ contact_us_form.last_name.errors }}
+            </div>
 
-      <div class="contact-us-form-field email-form">
-        <label for="email">{% translate "email" %}</label>
-        {{ contact_us_form.email }}
-        {{ contact_us_form.email.errors }}
-      </div>
+            <div class="contact-us-form-field email-form">
+                <label for="email">{% translate "email" %}</label>
+                {{ contact_us_form.email }}
+                {{ contact_us_form.email.errors }}
+            </div>
 
-      <div class="contact-us-form-field message-form">
-        <label for="contact-us-message">{% translate "message" %}</label>
-        {{ contact_us_form.message }}
-        {{ contact_us_form.message.errors }}
-      </div>
+            <div class="contact-us-form-field message-form">
+                <label for="contact-us-message">{% translate "message" %}</label>
+                {{ contact_us_form.message }}
+                {{ contact_us_form.message.errors }}
+            </div>
 
-      <input class="contact-us-button mail-btn" value="Send" type="submit">
-    </form>
-  </div>
+            <div class="contact-us-form-field captcha-form">
+                <label for="contact-us-message">{% translate "captcha" %}</label>
+                {{ contact_us_form.captcha }}
+                {{ contact_us_form.captcha.errors }}
+            </div>
+
+            <input class="contact-us-button mail-btn" value="Send" type="submit">
+        </form>
+    </div>
 {% endblock content %}
