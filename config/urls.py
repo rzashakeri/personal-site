@@ -11,6 +11,7 @@ from config.settings.production import ADMIN_URL
 urlpatterns = [
     path("", include("pages.urls")),
     path("blog/", include("blog.urls")),
+    path('captcha/', include('captcha.urls')),
     path("about/", TemplateView.as_view(template_name="pages/about.html"), name="about"),
     # Django Admin, use {% url 'admin:index' %}
     path('admin/', include('admin_honeypot.urls')),
