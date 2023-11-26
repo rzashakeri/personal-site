@@ -1,9 +1,11 @@
 from django import forms
-
+from captcha.fields import CaptchaField
 from pages.models import ContactUs
 
 
 class ContactUsModelForm(forms.ModelForm):
+    captcha = CaptchaField()
+
     class Meta:
         model = ContactUs
         fields = ['first_name', 'last_name', 'email', 'message']
