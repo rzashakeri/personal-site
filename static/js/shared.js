@@ -3,19 +3,24 @@ function resize(e) {
     sidebar.style.flexBasis = size;
 }
 
-function showContent() {
-    let element = document.querySelector(".sidebar-content");
-    let sideBar = document.querySelector("#sidebar")
-    if (element.style.display === "none") {
-        element.setAttribute(
-            "style",
-            "display: flex; flex-direction: column; width: 210px;"
-        );
-    } else {
-        element.setAttribute("style", "display: none;");
-        sideBar.removeAttribute("style");
 
+let lastElement;
+
+function showAndHideOthers(classToShow) {
+    const elementToShow = document.querySelector(classToShow);
+    const sidebar = document.getElementById('sidebar');
+
+
+    if (sidebar.style.flexBasis < '234px' || sidebar.style.flexBasis < '99px') {
+        sidebar.style.flexBasis = '234px';
     }
+
+    if (lastElement != null) {
+        lastElement.classList.remove('selected');
+    }
+
+    elementToShow.classList.add('selected');
+    lastElement = elementToShow;
 }
 
 const resizer = document.querySelector("#resizer");
