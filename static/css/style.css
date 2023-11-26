@@ -1159,3 +1159,28 @@ input[type=text], input[type=email], textarea {
     color: #c34242;
     margin-top: -12px;
 }
+
+
+/* ================================================ */
+/* post */
+/* ================================================ */
+
+.post {
+    display: flex;
+    padding: 5rem 5rem;
+    flex-direction: column;
+    gap: 13px;
+    width: 1316px;
+}
+
+.post-title {
+    font-family: 'Open Sans', sans-serif;
+    color: var(--color-text-primary);
+}
+
+.post-description {
+    font-family: 'Open Sans', sans-serif;
+    color: var(--color-text-primary);
+    font-size: 15px;
+    line-height: 2;
+}
