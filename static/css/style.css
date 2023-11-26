@@ -1184,3 +1184,12 @@ input[type=text], input[type=email], textarea {
     font-size: 15px;
     line-height: 2;
 }
+
+
+/* ================================================ */
+/* captcha */
+/* ================================================ */
+
+.captcha-form {
+    width: 30%;
+}
