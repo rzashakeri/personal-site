@@ -19,6 +19,15 @@ class AboutAdmin(admin.ModelAdmin):
 admin.site.register(About, AboutAdmin)
 
 
+class SkillCategoryAdmin(admin.ModelAdmin):
+    list_display = ["name"]
+    ordering = ["name"]
+    search_fields = ["name"]
+
+admin.site.register(SkillCategory, SkillCategoryAdmin)
+
+
+
 admin.site.register(Skill)
 admin.site.register(ContactUs)
 admin.site.register(Project)
