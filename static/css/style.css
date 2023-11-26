@@ -1170,7 +1170,6 @@ input[type=text], input[type=email], textarea {
     padding: 5rem 5rem;
     flex-direction: column;
     gap: 13px;
-    width: 1316px;
 }
 
 .post-title {
@@ -1185,6 +1184,10 @@ input[type=text], input[type=email], textarea {
     line-height: 2;
 }
 
+.post-date {
+    font-family: 'Open Sans', sans-serif;
+    color: var(--color-text-primary);
+}
 
 /* ================================================ */
 /* captcha */
