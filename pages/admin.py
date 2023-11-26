@@ -41,6 +41,15 @@ class ContactUsAdmin(admin.ModelAdmin):
     pass
 
 
-admin.site.register(Project)
+@admin.register(Project)
+class ProjectAdmin(admin.ModelAdmin):
+    list_display = ["page", "name", "star_count", "fork_count"]
+    list_filter = ["star_count", "fork_count"]
+    ordering = ["name"]
+    search_fields = ["name"]
+
+
+
+
 admin.site.register(SocialMedia)
 admin.site.register(Education)
