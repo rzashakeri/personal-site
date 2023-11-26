@@ -80,6 +80,7 @@ THIRD_PARTY_APPS = [
     "ckeditor",
     "storages",
     "admin_honeypot",
+    "captcha",
 ]
 
 LOCAL_APPS = [
