@@ -36,8 +36,11 @@ class SkillAdmin(admin.ModelAdmin):
 
 
 
+@admin.register(ContactUs)
+class ContactUsAdmin(admin.ModelAdmin):
+    pass
 
-admin.site.register(ContactUs)
+
 admin.site.register(Project)
 admin.site.register(SocialMedia)
 admin.site.register(Education)
