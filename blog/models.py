@@ -7,6 +7,7 @@ class Post(models.Model):
     Post model
     """
     title = models.CharField(max_length=100)
+    slug = models.SlugField()
     content = RichTextField()
     pub_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
