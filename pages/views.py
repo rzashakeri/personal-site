@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.views import View
 from django.views.generic import TemplateView
 
+from blog.models import Post
 from pages.forms import ContactUsModelForm
 from pages.models import (
     SiteSettings,
@@ -90,7 +91,9 @@ class SideBarView(TemplateView):
 
     def get_context_data(self, **kwargs):
         pages = Page.objects.all().order_by("-is_parent", "title")
+        posts = Post.objects.all()
         kwargs["pages"] = pages
+        kwargs["posts"] = posts
         return super(SideBarView, self).get_context_data(**kwargs)
 
 
