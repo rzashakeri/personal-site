@@ -163,6 +163,21 @@ table {
     color: var(--color-text-primary);
 }
 
+
+/* ================================================ */
+/* general */
+/* ================================================ */
+
+.display-none {
+    display: none;
+}
+
+.selected {
+    display: flex;
+    flex-direction: column;
+    width: 210px;
+}
+
 /* ================================================ */
 /* header */
 /* ================================================ */
@@ -408,7 +423,7 @@ table {
     padding: 0;
     box-sizing: border-box;
     background: #21252b;
-    min-width: 0;
+    min-width: 26px;
 }
 
 
@@ -438,6 +453,12 @@ table {
 .left-bar-item-text {
     writing-mode: tb-rl;
     transform: rotate(180deg);
+}
+
+.left-bar-active {
+    display: flex;
+    flex-direction: column;
+    width: 210px;
 }
 
 /* ================================================ */
