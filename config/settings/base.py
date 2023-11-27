@@ -81,7 +81,6 @@ THIRD_PARTY_APPS = [
     "storages",
     "admin_honeypot",
     "captcha",
-    "compressor",
 ]
 
 LOCAL_APPS = [
