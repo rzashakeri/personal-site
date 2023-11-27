@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}{{ request.resolver_match.kwargs.name }}{% endblock %}
+
+{% block content %}
+    <div class="tag">
+        <h1 class="tag-title">#{{ request.resolver_match.kwargs.name }}</h1>
+        {% for post in posts %}
+            <div class="card rounded">
+                <div class="card-heading">
+                <span class="card-heading-title small">
+                    <a class="card-heading-link post-title" style="font-size: 1.5rem; font-weight: bold;" href="{% url 'post' post.slug %}">{{ post.title }}</a></span>
+                    <div class="card-heading-description post-description" style="width: 215px;">{{ post.content|safe }}</div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
