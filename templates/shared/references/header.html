@@ -1,4 +1,5 @@
-{% load static %}
+{% load static compress %}
+{% compress js %}
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
 <script
         src="https://code.jquery.com/jquery-1.12.4.min.js"
@@ -8,4 +9,7 @@
 <script type="text/javascript" src="{% static 'js/jquery.codex.js' %}"></script>
 <script type="text/javascript" src="https://unpkg.com/typeit"></script>
 <script src="https://kit.fontawesome.com/5b50cdd3ae.js" crossorigin="anonymous"></script>
+{% endcompress %}
+{% compress css %}
 <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+{% endcompress %}

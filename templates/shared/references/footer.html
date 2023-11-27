@@ -1,2 +1,4 @@
-{% load static %}
+{% load static compress %}
+{% compress js %}
 <script type="text/javascript" src="{% static 'js/shared.js' %}"></script>
+{% endcompress %}
