@@ -8,8 +8,15 @@
             <div class="card rounded">
                 <div class="card-heading">
                 <span class="card-heading-title small">
-                    <a class="card-heading-link post-title" style="font-size: 1.5rem; font-weight: bold;" href="{% url 'post' post.slug %}">{{ post.title }}</a></span>
-                    <div class="card-heading-description post-description" style="width: 215px;">{{ post.content|safe }}</div>
+                    <div class="post-badges">
+                        {% for tag in post.tags.all %}
+                            <a href="{% url 'tag' name=tag %}" class="post-tag">#{{ tag }}</a>
+                        {% endfor %}
+                    </div>
+                    <a class="card-heading-link post-title" style="font-size: 1.5rem; font-weight: bold;"
+                       href="{% url 'post' post.slug %}">{{ post.title }}</a></span>
+                    <div class="card-heading-description post-description"
+                         style="width: 215px;">{{ post.content|safe }}</div>
                 </div>
             </div>
         {% endfor %}
