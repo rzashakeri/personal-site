@@ -12,9 +12,23 @@ class Post(models.Model):
     content = RichTextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    tag = models.ManyToManyField("Tag", related_name="posts")
 
     def __str__(self):
         return self.title
 
     class Meta:
         ordering = ['-created_at']
+
+
+class Tag(models.Model):
+    """
+    Tag model
+    """
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['name']
