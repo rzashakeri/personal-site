@@ -82,6 +82,7 @@ THIRD_PARTY_APPS = [
     "ckeditor",
     "admin_honeypot",
     "captcha",
+    "compressor",
 ]
 
 LOCAL_APPS = [
@@ -127,6 +128,7 @@ STATICFILES_DIRS = [str(BASE_DIR / "static")]
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    "compressor.finders.CompressorFinder",
 ]
 
 # MEDIA
