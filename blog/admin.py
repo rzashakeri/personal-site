@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from blog.models import Post, Tag, Comment
+from blog.models import Post, Tag
 
 
 @admin.register(Post)
@@ -17,11 +17,4 @@ class TagAdmin(admin.ModelAdmin):
     ordering = ["name"]
     search_fields = ["name"]
 
-
-@admin.register(Comment)
-class CommentAdmin(admin.ModelAdmin):
-    list_display = ["post", "name", "email", "created_at", "updated_at"]
-    list_filter = ["created_at"]
-    ordering = ["created_at"]
-    search_fields = ["message"]
 
