@@ -1222,6 +1222,10 @@ input[type=text], input[type=email], textarea {
     text-decoration: underline;
 }
 
+.post-badges {
+    margin-bottom: 20px;
+}
+
 /* ================================================ */
 /* captcha */
 /* ================================================ */
