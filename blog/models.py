@@ -1,6 +1,6 @@
 from django.db import models
 from ckeditor.fields import RichTextField
-
+from autoslug import AutoSlugField
 
 class Post(models.Model):
     """
@@ -8,7 +8,7 @@ class Post(models.Model):
     """
     title = models.CharField(max_length=100)
     icon = models.FileField(upload_to='icons/')
-    slug = models.SlugField()
+    slug = AutoSlugField(populate_from='title')
     content = RichTextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
