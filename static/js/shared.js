@@ -10,8 +10,16 @@ function showAndHideOthers(classToShow) {
     const elementToShow = document.querySelector(classToShow);
     const sidebar = document.getElementById('sidebar');
 
-
     if (sidebar.style.flexBasis < '234px' || sidebar.style.flexBasis < '99px') {
+        sidebar.style.flexBasis = '234px';
+    }
+
+
+    if (lastElement === elementToShow) {
+        elementToShow.classList.remove('selected');
+        sidebar.style.flexBasis = '0px';
+    } else {
+        elementToShow.classList.add('selected');
         sidebar.style.flexBasis = '234px';
     }
 
@@ -19,8 +27,8 @@ function showAndHideOthers(classToShow) {
         lastElement.classList.remove('selected');
     }
 
-    elementToShow.classList.add('selected');
     lastElement = elementToShow;
+
 }
 
 const resizer = document.querySelector("#resizer");
