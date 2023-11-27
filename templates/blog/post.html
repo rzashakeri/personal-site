@@ -8,5 +8,9 @@
         <h1 class="post-title">{{ page.title }}</h1>
         <span class="post-date">created at {{ page.created_at }}</span>
         <div class="post-description">{{ page.content|safe }}</div>
+        {% for tag in page.tags.all %}
+        <span class="post-tag">#{{ tag }}</span>
+        {% endfor %}
+
     </div>
 {% endblock %}
