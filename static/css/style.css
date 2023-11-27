@@ -178,12 +178,12 @@ table {
     width: 210px;
 }
 
-.line-clamp{
-  	display: -webkit-box;
-	-webkit-line-clamp: 2;
-	-webkit-box-orient: vertical;
-	text-overflow: ellipsis;
-  	overflow: hidden;
+.line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 /* ================================================ */
@@ -862,6 +862,12 @@ table {
     /*align-items: center;*/
 }
 
+.projects-head-text {
+    font-family: 'Open Sans', sans-serif;
+    color: var(--color-text-light-grey);
+    font-size: 3rem;
+}
+
 /* ================================================ */
 /* project */
 /* ================================================ */
@@ -982,6 +988,10 @@ table {
 .card-heading-link {
     color: var(--color-text-primary);
     text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: 'Open Sans', sans-serif;
+
 }
 
 .card-heading-link:hover {
