@@ -178,6 +178,14 @@ table {
     width: 210px;
 }
 
+.line-clamp{
+  	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	text-overflow: ellipsis;
+  	overflow: hidden;
+}
+
 /* ================================================ */
 /* header */
 /* ================================================ */
@@ -1177,7 +1185,7 @@ input[type=text], input[type=email], textarea {
     color: var(--color-text-primary);
 }
 
-.post-description {
+.post-description * {
     font-family: 'Open Sans', sans-serif;
     color: var(--color-text-primary);
     font-size: 15px;
@@ -1191,12 +1199,17 @@ input[type=text], input[type=email], textarea {
 
 .post-tag {
     font-family: 'Open Sans', sans-serif;
-    font-size: 1rem;
+    font-size: 11px;
     color: var(--color-text-light-grey);
     padding: 5px;
     border-radius: 5px;
     background-color: var(--color-header);
     width: fit-content;
+    text-decoration: none;
+}
+
+.post-tag:hover {
+    text-decoration: underline;
 }
 
 /* ================================================ */
@@ -1205,4 +1218,25 @@ input[type=text], input[type=email], textarea {
 
 .captcha-form {
     width: 30%;
+}
+
+
+/* ================================================ */
+/* tag */
+/* ================================================ */
+
+.tag .tag-title {
+    font-family: 'Open Sans', sans-serif;
+    color: var(--color-text-light-grey);
+    font-size: 3rem;
+}
+
+.tag {
+    padding: 30px;
+}
+
+.tag-title {
+    margin-left: 1rem;
+    margin-bottom: 33px;
+    text-transform: capitalize;
 }
