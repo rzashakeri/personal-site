@@ -12,7 +12,7 @@ class Post(models.Model):
     content = RichTextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    tag = models.ManyToManyField("Tag", related_name="posts")
+    tags = models.ManyToManyField("Tag", blank=True)
 
     def __str__(self):
         return self.title
