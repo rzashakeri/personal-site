@@ -26,7 +26,7 @@ class Tag(models.Model):
     Tag model
     """
     name = models.CharField(max_length=100)
-    description = models.TextField()
+    description = models.TextField(blank=True)
 
     def __str__(self):
         return self.name
