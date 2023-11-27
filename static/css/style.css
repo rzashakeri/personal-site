@@ -1189,6 +1189,16 @@ input[type=text], input[type=email], textarea {
     color: var(--color-text-primary);
 }
 
+.post-tag {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+    color: var(--color-text-light-grey);
+    padding: 5px;
+    border-radius: 5px;
+    background-color: var(--color-header);
+    width: fit-content;
+}
+
 /* ================================================ */
 /* captcha */
 /* ================================================ */
