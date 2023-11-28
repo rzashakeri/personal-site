@@ -7,22 +7,22 @@ let lastElement;
 
 function showAndHideOthers(classToShow) {
   const elementToShow = document.querySelector(classToShow);
-  const sidebar = document.getElementById('sidebar');
+  const sidebar = document.getElementById("sidebar");
 
-  if (sidebar.style.flexBasis < '234px' || sidebar.style.flexBasis < '99px') {
-    sidebar.style.flexBasis = '234px';
+  if (sidebar.style.flexBasis < "234px" || sidebar.style.flexBasis < "99px") {
+    sidebar.style.flexBasis = "234px";
   }
 
   if (lastElement === elementToShow) {
-    elementToShow.classList.remove('selected');
-    sidebar.style.flexBasis = '0px';
+    elementToShow.classList.remove("selected");
+    sidebar.style.flexBasis = "0px";
   } else {
-    elementToShow.classList.add('selected');
-    sidebar.style.flexBasis = '234px';
+    elementToShow.classList.add("selected");
+    sidebar.style.flexBasis = "234px";
   }
 
   if (lastElement != null) {
-    lastElement.classList.remove('selected');
+    lastElement.classList.remove("selected");
   }
 
   lastElement = elementToShow;
@@ -34,9 +34,12 @@ const sidebar = document.querySelector("#sidebar");
 resizer.addEventListener("mousedown", (event) => {
   document.addEventListener("mousemove", resize, false);
   document.addEventListener(
-      "mouseup",
-      () => { document.removeEventListener("mousemove", resize, false); },
-      false);
+    "mouseup",
+    () => {
+      document.removeEventListener("mousemove", resize, false);
+    },
+    false,
+  );
 });
 
 setInterval(() => $("#dateTime").text(new Date().toLocaleString()), 1000);
@@ -46,23 +49,29 @@ function OpenClose(elementClass, SidebarItemsClass) {
   let sidebarItems = document.querySelector(`.${SidebarItemsClass}`);
   if (element.className === elementClass) {
     element.setAttribute(
-        "src",
-        "https://storage.iran.liara.space/public-static-rezashakeri/static/images/icons/findAndShowNextMatches.svg");
+      "src",
+      "https://storage.iran.liara.space/public-static-rezashakeri/static/images/icons/findAndShowNextMatches.svg",
+    );
     element.className += " open";
     sidebarItems.removeAttribute("style");
   } else {
     element.setAttribute(
-        "src",
-        "https://storage.iran.liara.space/public-static-rezashakeri/static/images/icons/play_forward.svg");
+      "src",
+      "https://storage.iran.liara.space/public-static-rezashakeri/static/images/icons/play_forward.svg",
+    );
     element.className = elementClass;
     sidebarItems.setAttribute("style", "display: none;");
   }
 }
 
 let docTitle = document.title;
-window.addEventListener("blur", () => { document.title = "Come Back :("; });
+window.addEventListener("blur", () => {
+  document.title = "Come Back :(";
+});
 
-window.addEventListener("focus", () => { document.title = docTitle; });
+window.addEventListener("focus", () => {
+  document.title = docTitle;
+});
 
 const CONSOLE_MESSAGE = `
 
