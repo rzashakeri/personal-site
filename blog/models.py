@@ -26,6 +26,9 @@ class Tag(models.Model):
     Tag model
     """
     name = models.CharField(max_length=100)
+    slug = AutoSlugField(populate_from='name')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     description = models.TextField(blank=True)
 
     def __str__(self):
