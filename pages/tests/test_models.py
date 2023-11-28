@@ -1,7 +1,8 @@
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from django.utils.text import slugify
-from pages.models import SiteSettings, Page, About, ContactUs, SkillCategory, Skill, Project, SocialMedia
+from datetime import datetime, timedelta
+from pages.models import SiteSettings, Page, About, ContactUs, SkillCategory, Skill, Project, SocialMedia, Education
 
 
 class SiteSettingsModelTest(TestCase):
@@ -81,3 +82,17 @@ class SocialMediaModelTest(TestCase):
         self.assertEqual(str(social_media), 'Twitter')
 
 
+class EducationModelTest(TestCase):
+
+    def test_education_str(self):
+        education = Education.objects.create(
+            Degree='Bachelor of Science',
+            School='University of Example',
+            country='USA',
+            city='Example City',
+            start_date=datetime(2018, 9, 1),
+            end_date=datetime(2022, 5, 30),
+            present=False,
+            description='Studied Computer Science.'
+        )
+        self.assertEqual(str(education), 'Bachelor of Science | University of Example')
