@@ -1254,3 +1254,9 @@ input[type=text], input[type=email], textarea {
     margin-bottom: 33px;
     text-transform: capitalize;
 }
+
+.tag-content {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 8rem;
+}
