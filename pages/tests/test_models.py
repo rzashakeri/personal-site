@@ -1,6 +1,6 @@
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
-from pages.models import SiteSettings, Page
+from pages.models import SiteSettings, Page, About
 
 
 class SiteSettingsModelTest(TestCase):
@@ -19,4 +19,11 @@ class PageModelTest(TestCase):
     def test_page_str(self):
         page = Page.objects.create(title='Test Page', icon=SimpleUploadedFile("icon.png", b"file_content"))
         self.assertEqual(str(page), 'Test Page')
+
+
+class AboutModelTest(TestCase):
+    def test_about_str(self):
+        page = Page.objects.create(title='Test Page', icon=SimpleUploadedFile("icon.png", b"file_content"))
+        about = About.objects.create(page=page, heading='About Me', body='Some details about me.')
+        self.assertEqual(str(about), 'About Me')
 
