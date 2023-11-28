@@ -1,6 +1,6 @@
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
-from pages.models import SiteSettings, Page, About, ContactUs
+from pages.models import SiteSettings, Page, About, ContactUs, SkillCategory
 
 
 class SiteSettingsModelTest(TestCase):
@@ -43,3 +43,7 @@ class ContactUsModelTest(TestCase):
         self.assertEqual(str(contact_us), expected_str)
 
 
+class SkillCategoryTest(TestCase):
+    def test_skill_category_str(self):
+        skill_category = SkillCategory.objects.create(name='Programming', description='Programming skills')
+        self.assertEqual(str(skill_category), 'Programming')
