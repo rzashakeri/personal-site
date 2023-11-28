@@ -1,7 +1,7 @@
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from django.utils.text import slugify
-from pages.models import SiteSettings, Page, About, ContactUs, SkillCategory, Skill, Project
+from pages.models import SiteSettings, Page, About, ContactUs, SkillCategory, Skill, Project, SocialMedia
 
 
 class SiteSettingsModelTest(TestCase):
@@ -69,4 +69,15 @@ class ProjectModelTest(TestCase):
             description='A long description about the project.'
         )
         self.assertEqual(str(project), 'My Project')
+
+
+class SocialMediaModelTest(TestCase):
+    def test_social_media_str(self):
+        social_media = SocialMedia.objects.create(
+            name='Twitter',
+            link='https://twitter.com/example',
+            icon=SimpleUploadedFile("twitter.png", b"file_content")
+        )
+        self.assertEqual(str(social_media), 'Twitter')
+
 
