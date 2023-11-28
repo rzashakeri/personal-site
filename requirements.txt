@@ -14,3 +14,4 @@ gunicorn
 git+https://github.com/dmpayton/django-admin-honeypot.git@develop
 django-simple-captcha==0.5.20
 django-autoslug==1.9.9
+coverage==7.3.2
