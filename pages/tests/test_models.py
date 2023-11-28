@@ -1,6 +1,7 @@
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
-from pages.models import SiteSettings, Page, About, ContactUs, SkillCategory, Skill
+from django.utils.text import slugify
+from pages.models import SiteSettings, Page, About, ContactUs, SkillCategory, Skill, Project
 
 
 class SiteSettingsModelTest(TestCase):
@@ -28,7 +29,6 @@ class AboutModelTest(TestCase):
         self.assertEqual(str(about), 'About Me')
 
 
-
 class ContactUsModelTest(TestCase):
     def test_contact_us_str(self):
         page = Page.objects.create(title='Test Page', icon=SimpleUploadedFile("icon.png", b"file_content"))
@@ -49,10 +49,24 @@ class SkillCategoryTest(TestCase):
         self.assertEqual(str(skill_category), 'Programming')
 
 
-
 class SkillModelTest(TestCase):
     def test_skill_str(self):
         skill_category = SkillCategory.objects.create(name='Programming', description='Programming skills')
         skill = Skill.objects.create(category=skill_category, name='Python')
         self.assertEqual(str(skill), 'Python (Programming)')
+
+
+class ProjectModelTest(TestCase):
+    def test_project_str(self):
+        page = Page.objects.create(title='Test Page', icon=SimpleUploadedFile("icon.png", b"file_content"))
+        project = Project.objects.create(
+            page=page,
+            name='My Project',
+            slug=slugify('My Project'),
+            star_count=100,
+            fork_count=50,
+            short_description='A short description',
+            description='A long description about the project.'
+        )
+        self.assertEqual(str(project), 'My Project')
 
