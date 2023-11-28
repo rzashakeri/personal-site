@@ -10,7 +10,7 @@ class SiteSettings(models.Model):
     domain = models.CharField(max_length=300)
     name = models.CharField(max_length=255)
     job_title = models.CharField(max_length=255)
-    footer_text = models.CharField(max_length=255, null=True, blank=True)
+    footer_text = models.CharField(max_length=255, blank=True)
     footer_link = models.URLField(max_length=255, null=True, blank=True)
 
     def __str__(self):
