@@ -4,9 +4,10 @@
 {% block content %}
     <div class="tag">
         <h1 class="tag-title">#{{ request.resolver_match.kwargs.name }}</h1>
-        {% for post in posts %}
-            <div class="card rounded">
-                <div class="card-heading">
+        <div class="tag-content">
+            {% for post in posts %}
+                <div class="card rounded">
+                    <div class="card-heading">
                 <span class="card-heading-title small">
                     <div class="post-badges">
                         {% for tag in post.tags.all %}
@@ -15,10 +16,11 @@
                     </div>
                     <a class="card-heading-link post-title" style="font-size: 1.5rem; font-weight: bold;"
                        href="{% url 'post' post.slug %}">{{ post.title }}</a></span>
-                    <div class="card-heading-description post-description"
-                         style="width: 215px;">{{ post.content|safe }}</div>
+                        <div class="card-heading-description post-description"
+                             style="width: 215px;">{{ post.content|safe }}</div>
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}
