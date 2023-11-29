@@ -31,13 +31,17 @@ jobs:
 
       - name: Migrate Database
         run: python manage.py migrate
-        
+
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
       - name: Run Tests
         run: python manage.py test
   
-
   deploy:
-    needs: build
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
