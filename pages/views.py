@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 from django.views.generic import TemplateView
+from django.shortcuts import get_object_or_404
 
 from blog.models import Post
 from pages.forms import ContactUsModelForm
@@ -19,12 +20,20 @@ from pages.models import (
 
 class HomeView(View):
     def get(self, request):
+        # Redirect to the "home" URL if the current path is "/home/"
         if request.path == "/home/":
             return redirect(reverse("home"))
 
-        home = Page.objects.get(slug="home")
+        # Retrieve the "home" page object
+        home = get_object_or_404(Page, slug="home")
+
+        # Retrieve the site settings object
         portfolio = SiteSettings.objects.first()
+
+        # Create a context dictionary with the page and portfolio objects
         context = {"page": home, "portfolio": portfolio}
+
+        # Render the index.html template with the context data
         return render(request, "pages/index.html", context=context)
 
 
