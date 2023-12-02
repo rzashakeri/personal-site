@@ -41,7 +41,7 @@ class HomeView(View):
         # Create a context dictionary with the page and portfolio objects
         context = {"page": home, "portfolio": portfolio}
 
-
+        # Render the index.html template with the context data
         return render(request, "pages/index.html", context=context)
 
 
