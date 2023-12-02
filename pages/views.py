@@ -45,11 +45,28 @@ class HomeView(View):
         return render(request, "pages/index.html", context=context)
 
 
+# Import necessary modules
+from django.shortcuts import render, get_object_or_404
+from django.views import View
+from .models import Page, About
+
+
 class AboutView(View):
+    """
+    Retrieves the "about-us" page from the database along with the first About object.
+    """
+
     def get(self, request):
-        about_us = Page.objects.get(slug="about-us")
+        # Retrieve the "about-us" page from the database
+        about_us = get_object_or_404(Page, slug="about-us")
+
+        # Retrieve the first About object from the database
         about = About.objects.first()
+
+        # Create a context dictionary with the retrieved objects
         context = {"page": about_us, "about": about}
+
+        # Render the "about.html" template with the context dictionary and return the response
         return render(request, "pages/about.html", context=context)
 
 
