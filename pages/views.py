@@ -20,6 +20,14 @@ from pages.models import (
 
 class HomeView(View):
     def get(self, request):
+        """
+        Handle GET requests for the view.
+
+        Redirect to the "home" URL if the current path is "/home/".
+        Retrieve the "home" page object and the site settings object.
+        Render the index.html template with the context data.
+        """
+
         # Redirect to the "home" URL if the current path is "/home/"
         if request.path == "/home/":
             return redirect(reverse("home"))
@@ -33,7 +41,7 @@ class HomeView(View):
         # Create a context dictionary with the page and portfolio objects
         context = {"page": home, "portfolio": portfolio}
 
-        # Render the index.html template with the context data
+
         return render(request, "pages/index.html", context=context)
 
 
