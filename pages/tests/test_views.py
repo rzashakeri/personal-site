@@ -3,11 +3,14 @@ from django.contrib.messages import get_messages
 from django.contrib.messages.storage.fallback import FallbackStorage
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.http import Http404
-from django.test import RequestFactory, TestCase
+from django.test import RequestFactory
+from django.test import TestCase
 from django.urls import reverse
 
 from pages.forms import ContactUsModelForm
-from pages.models import About, Page, SiteSettings
+from pages.models import About
+from pages.models import Page
+from pages.models import SiteSettings
 from pages.views import ContactUsView
 
 
