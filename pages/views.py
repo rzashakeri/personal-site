@@ -21,12 +21,12 @@ class HomeView(View):
     """ """
     def get(self, request):
         """Handle GET requests for the view.
-        
+
         Redirect to the "home" URL if the current path is "/home/".
         Retrieve the "home" page object and the site settings object.
         Render the index.html template with the context data.
 
-        :param request: 
+        :param request:
 
         """
 
@@ -53,7 +53,7 @@ class AboutView(View):
     def get(self, request):
         """
 
-        :param request: 
+        :param request:
 
         """
         # Retrieve the "about-us" page from the database
@@ -71,9 +71,9 @@ class AboutView(View):
 
 class ContactUsView(View):
     """This view handles the contact us page.
-    
+
     It renders the contact.html template with the following context:
-    
+
     - contact_us_form: An instance of the ContactUsModelForm
     - page: The Page object with slug "contact-us"
 
@@ -83,7 +83,7 @@ class ContactUsView(View):
     def get(self, request):
         """
 
-        :param request: 
+        :param request:
 
         """
         # Create an instance of the ContactUsModelForm
@@ -101,7 +101,7 @@ class ContactUsView(View):
     def post(self, request):
         """
 
-        :param request: 
+        :param request:
 
         """
         # Create an instance of the ContactUsModelForm with the POST data
@@ -137,7 +137,7 @@ class ProjectsView(View):
     def get(self, request):
         """
 
-        :param request: 
+        :param request:
 
         """
         page = Page.objects.get(slug="projects")
@@ -151,8 +151,8 @@ class ProjectView(View):
     def get(self, request, slug):
         """
 
-        :param request: 
-        :param slug: 
+        :param request:
+        :param slug:
 
         """
         try:
@@ -169,7 +169,7 @@ class SkillsView(View):
     def get(self, request):
         """
 
-        :param request: 
+        :param request:
 
         """
         page = Page.objects.get(slug="skills")
@@ -186,7 +186,7 @@ class SideBarView(TemplateView):
     def get_context_data(self, **kwargs):
         """
 
-        :param **kwargs: 
+        :param **kwargs:
 
         """
         pages = Page.objects.all().order_by("-is_parent", "title")
@@ -199,7 +199,7 @@ class SideBarView(TemplateView):
 def render_navbar_title(request):
     """
 
-    :param request: 
+    :param request:
 
     """
     portfolio = SiteSettings.objects.first()
@@ -210,7 +210,7 @@ def render_navbar_title(request):
 def breadcrumb_title(request):
     """
 
-    :param request: 
+    :param request:
 
     """
     portfolio = SiteSettings.objects.first()
@@ -221,7 +221,7 @@ def breadcrumb_title(request):
 def render_social_media(request):
     """
 
-    :param request: 
+    :param request:
 
     """
     social_medias = SocialMedia.objects.all()
@@ -232,7 +232,7 @@ def render_social_media(request):
 def render_footer(request):
     """
 
-    :param request: 
+    :param request:
 
     """
     site = SiteSettings.objects.first()
