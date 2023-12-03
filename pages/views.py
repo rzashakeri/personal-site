@@ -45,7 +45,6 @@ class HomeView(View):
         return render(request, "pages/index.html", context=context)
 
 
-
 class AboutView(View):
     """
     Retrieves the "about-us" page from the database along with the first About object.
@@ -74,6 +73,7 @@ class ContactUsView(View):
     - contact_us_form: An instance of the ContactUsModelForm
     - page: The Page object with slug "contact-us"
     """
+
     def get(self, request):
         # Create an instance of the ContactUsModelForm
         contact_us_form = ContactUsModelForm()
