@@ -12,13 +12,16 @@ from pages.models import (About, Page, Project, SiteSettings, SkillCategory,
 
 
 class HomeView(View):
+    """ """
     def get(self, request):
-        """
-        Handle GET requests for the view.
-
+        """Handle GET requests for the view.
+        
         Redirect to the "home" URL if the current path is "/home/".
         Retrieve the "home" page object and the site settings object.
         Render the index.html template with the context data.
+
+        :param request: 
+
         """
 
         # Redirect to the "home" URL if the current path is "/home/"
@@ -39,11 +42,14 @@ class HomeView(View):
 
 
 class AboutView(View):
-    """
-    Retrieves the "about-us" page from the database along with the first About object.
-    """
+    """Retrieves the "about-us" page from the database along with the first About object."""
 
     def get(self, request):
+        """
+
+        :param request: 
+
+        """
         # Retrieve the "about-us" page from the database
         about_us = get_object_or_404(Page, slug="about-us")
 
@@ -58,16 +64,22 @@ class AboutView(View):
 
 
 class ContactUsView(View):
-    """
-    This view handles the contact us page.
-
+    """This view handles the contact us page.
+    
     It renders the contact.html template with the following context:
-
+    
     - contact_us_form: An instance of the ContactUsModelForm
     - page: The Page object with slug "contact-us"
+
+
     """
 
     def get(self, request):
+        """
+
+        :param request: 
+
+        """
         # Create an instance of the ContactUsModelForm
         contact_us_form = ContactUsModelForm()
 
@@ -81,6 +93,11 @@ class ContactUsView(View):
         return render(request, "pages/contact.html", context=context)
 
     def post(self, request):
+        """
+
+        :param request: 
+
+        """
         # Create an instance of the ContactUsModelForm with the POST data
         contact_us_form = ContactUsModelForm(request.POST)
 
@@ -110,7 +127,13 @@ class ContactUsView(View):
 
 
 class ProjectsView(View):
+    """ """
     def get(self, request):
+        """
+
+        :param request: 
+
+        """
         page = Page.objects.get(slug="projects")
         projects = Project.objects.all().order_by("-star_count")
         context = {"page": page, "projects": projects}
@@ -118,7 +141,14 @@ class ProjectsView(View):
 
 
 class ProjectView(View):
+    """ """
     def get(self, request, slug):
+        """
+
+        :param request: 
+        :param slug: 
+
+        """
         try:
             project = Project.objects.get(slug=slug)
             page = project.page
@@ -129,7 +159,13 @@ class ProjectView(View):
 
 
 class SkillsView(View):
+    """ """
     def get(self, request):
+        """
+
+        :param request: 
+
+        """
         page = Page.objects.get(slug="skills")
         skill_category = SkillCategory.objects.all().order_by("name")
         context = {"page": page, "skill_category": skill_category}
@@ -137,10 +173,16 @@ class SkillsView(View):
 
 
 class SideBarView(TemplateView):
+    """ """
     template_name = "shared/sidebar.html"
     ordering = ["is_parent"]
 
     def get_context_data(self, **kwargs):
+        """
+
+        :param **kwargs: 
+
+        """
         pages = Page.objects.all().order_by("-is_parent", "title")
         posts = Post.objects.all()
         kwargs["pages"] = pages
@@ -149,24 +191,44 @@ class SideBarView(TemplateView):
 
 
 def render_navbar_title(request):
+    """
+
+    :param request: 
+
+    """
     portfolio = SiteSettings.objects.first()
     context = {"portfolio": portfolio}
     return render(request, "shared/partials/navbar_title.html", context=context)
 
 
 def breadcrumb_title(request):
+    """
+
+    :param request: 
+
+    """
     portfolio = SiteSettings.objects.first()
     context = {"portfolio": portfolio}
     return render(request, "shared/partials/breadcrumb_title.html", context=context)
 
 
 def render_social_media(request):
+    """
+
+    :param request: 
+
+    """
     social_medias = SocialMedia.objects.all()
     context = {"social_medias": social_medias}
     return render(request, "shared/social_media.html", context=context)
 
 
 def render_footer(request):
+    """
+
+    :param request: 
+
+    """
     site = SiteSettings.objects.first()
     context = {"site": site}
     return render(request, "shared/footer.html", context=context)
