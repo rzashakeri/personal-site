@@ -45,11 +45,6 @@ class HomeView(View):
         return render(request, "pages/index.html", context=context)
 
 
-# Import necessary modules
-from django.shortcuts import render, get_object_or_404
-from django.views import View
-from .models import Page, About
-
 
 class AboutView(View):
     """
@@ -76,6 +71,7 @@ class ContactUsView(View):
         contact_us = Page.objects.get(slug="contact-us")
         context = {"contact_us_form": contact_us_form, "page": contact_us}
         return render(request, "pages/contact.html", context=context)
+
 
     def post(self, request):
         contact_us_form = ContactUsModelForm(request.POST)

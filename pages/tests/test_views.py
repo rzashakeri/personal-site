@@ -1,10 +1,10 @@
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from django.urls import reverse
-from django.contrib.auth.models import User
-from django.test import Client
 
-from pages.models import Page, SiteSettings  # Replace 'yourapp' with the actual name of your app
+
+from pages.models import Page, SiteSettings, About
+
 
 class HomeViewTest(TestCase):
     def setUp(self):
@@ -32,3 +32,37 @@ class HomeViewTest(TestCase):
         # Check that the context contains the expected page and portfolio objects
         self.assertEqual(response.context['page'], self.page)
         self.assertEqual(response.context['portfolio'], self.site_settings)
+
+
+class AboutViewTest(TestCase):
+    def test_get_about_page(self):
+        # Create a test "about-us" page in the database
+        about_us = Page.objects.create(title="About Us", slug="about-us", icon=SimpleUploadedFile("icon.png", b"file_content"))
+        # Create a test About object in the database
+        about = About.objects.create(page=about_us, heading="About", body="This is the about page.")
+
+        # Get the about page
+        response = self.client.get(reverse('about'), follow=True)
+
+        # Check that the response status code is 200
+        self.assertEqual(response.status_code, 200)
+
+        # Check that the correct template is used
+        self.assertTemplateUsed(response, 'pages/about.html')
+
+        # Check that the correct context is used
+        self.assertEqual(response.context['page'], about_us)
+        self.assertEqual(response.context['about'], about)
+
+    def test_get_about_page_with_no_about_object(self):
+        # Delete the about object from the database
+        About.objects.all().delete()
+
+        # Get the about page
+        response = self.client.get(reverse('about'), follow=True)
+
+        # Check that the response status code is 200
+        self.assertEqual(response.status_code, 404)
+
+        # Check that the about object is not in the context
+        self.assertNotIn('about', response.context)
