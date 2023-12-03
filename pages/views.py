@@ -19,6 +19,7 @@ from pages.models import SocialMedia
 
 class HomeView(View):
     """ """
+
     def get(self, request):
         """Handle GET requests for the view.
 
@@ -134,6 +135,7 @@ class ContactUsView(View):
 
 class ProjectsView(View):
     """ """
+
     def get(self, request):
         """
 
@@ -148,6 +150,7 @@ class ProjectsView(View):
 
 class ProjectView(View):
     """ """
+
     def get(self, request, slug):
         """
 
@@ -166,6 +169,7 @@ class ProjectView(View):
 
 class SkillsView(View):
     """ """
+
     def get(self, request):
         """
 
@@ -204,7 +208,9 @@ def render_navbar_title(request):
     """
     portfolio = SiteSettings.objects.first()
     context = {"portfolio": portfolio}
-    return render(request, "shared/partials/navbar_title.html", context=context)
+    return render(request,
+                  "shared/partials/navbar_title.html",
+                  context=context)
 
 
 def breadcrumb_title(request):
@@ -215,7 +221,9 @@ def breadcrumb_title(request):
     """
     portfolio = SiteSettings.objects.first()
     context = {"portfolio": portfolio}
-    return render(request, "shared/partials/breadcrumb_title.html", context=context)
+    return render(request,
+                  "shared/partials/breadcrumb_title.html",
+                  context=context)
 
 
 def render_social_media(request):
