@@ -66,25 +66,53 @@ class AboutView(View):
 
 
 class ContactUsView(View):
+    """
+    This view handles the contact us page.
+
+    It renders the contact.html template with the following context:
+
+    - contact_us_form: An instance of the ContactUsModelForm
+    - page: The Page object with slug "contact-us"
+    """
     def get(self, request):
+        # Create an instance of the ContactUsModelForm
         contact_us_form = ContactUsModelForm()
-        contact_us = Page.objects.get(slug="contact-us")
+
+        # Retrieve the Page object with slug "contact-us"
+        contact_us = get_object_or_404(Page, slug="contact-us")
+
+        # Create a dictionary with the ContactUsModelForm and the Page object
         context = {"contact_us_form": contact_us_form, "page": contact_us}
+
+        # Render the "contact.html" template with the context dictionary
         return render(request, "pages/contact.html", context=context)
 
-
     def post(self, request):
+        # Create an instance of the ContactUsModelForm with the POST data
         contact_us_form = ContactUsModelForm(request.POST)
-        contact_us = Page.objects.get(slug="contact-us")
+
+        # Get the Page object with the slug "contact-us"
+        contact_us = get_object_or_404(Page, slug="contact-us")
+
+        # Create a dictionary with the form and page objects as context
         context = {"contact_us_form": contact_us_form, "page": contact_us}
+
+        # Check if the form data is valid
         if contact_us_form.is_valid():
+            # Save the form data
             contact_us_form.save()
+
+            # Display a success message to the user
             messages.success(
                 request,
                 "Message sent successfully",
                 extra_tags="fa-sharp fa-solid fa-square-check fa-xl",
             )
+
+            # Redirect the user to the home page
             return redirect(reverse("home"))
+
+        # If the form data is not valid, render the contact.html template with the context
         return render(request, "pages/contact.html", context=context)
 
 
