@@ -1,14 +1,20 @@
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
+from django.shortcuts import render
 from django.urls import reverse
 from django.views import View
 from django.views.generic import TemplateView
 
 from blog.models import Post
 from pages.forms import ContactUsModelForm
-from pages.models import (About, Page, Project, SiteSettings, SkillCategory,
-                          SocialMedia)
+from pages.models import About
+from pages.models import Page
+from pages.models import Project
+from pages.models import SiteSettings
+from pages.models import SkillCategory
+from pages.models import SocialMedia
 
 
 class HomeView(View):
