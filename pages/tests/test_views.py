@@ -1,9 +1,14 @@
+from django.contrib import messages
+from django.contrib.messages import get_messages
+from django.contrib.messages.storage.fallback import FallbackStorage
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.test import TestCase
+from django.http import Http404
+from django.test import TestCase, RequestFactory
 from django.urls import reverse
 
-
+from pages.forms import ContactUsModelForm
 from pages.models import Page, SiteSettings, About
+from pages.views import ContactUsView
 
 
 class HomeViewTest(TestCase):
@@ -37,7 +42,8 @@ class HomeViewTest(TestCase):
 class AboutViewTest(TestCase):
     def test_get_about_page(self):
         # Create a test "about-us" page in the database
-        about_us = Page.objects.create(title="About Us", slug="about-us", icon=SimpleUploadedFile("icon.png", b"file_content"))
+        about_us = Page.objects.create(title="About Us", slug="about-us",
+                                       icon=SimpleUploadedFile("icon.png", b"file_content"))
         # Create a test About object in the database
         about = About.objects.create(page=about_us, heading="About", body="This is the about page.")
 
@@ -66,3 +72,18 @@ class AboutViewTest(TestCase):
 
         # Check that the about object is not in the context
         self.assertNotIn('about', response.context)
+
+
+class ContactUsViewTest(TestCase):
+    def setUp(self):
+        self.page = Page.objects.create(title="Contact Us", slug='contact-us',
+                                        icon=SimpleUploadedFile("icon.png", b"file_content"))
+        self.url = reverse('contact_us')
+
+    def test_get_method(self):
+        response = self.client.get(self.url, follow=True)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'pages/contact.html')
+        self.assertIsInstance(response.context['contact_us_form'], ContactUsModelForm)
+        self.assertEqual(response.context['page'], self.page)
