@@ -4,6 +4,7 @@
 ![django](https://img.shields.io/badge/django-092e20)
 ![PyCharm](https://img.shields.io/badge/pycharm-1e7240)
 [![CI/CD](https://github.com/rzashakeri/personal-site/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/rzashakeri/personal-site/actions/workflows/ci-cd.yml)
+[![Coverage Status](https://coveralls.io/repos/github/rzashakeri/personal-site/badge.svg?branch=master)](https://coveralls.io/github/rzashakeri/personal-site?branch=master)
 
 https://github.com/rzashakeri/pycharm-portfolio/assets/62311769/f3d5ffba-2712-434d-8777-c7630646de70
 
