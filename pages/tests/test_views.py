@@ -7,11 +7,11 @@ from pages.forms import ContactUsModelForm
 from pages.models import Page, SiteSettings, About, ContactUs
 
 
-
 class HomeViewTest(TestCase):
     def setUp(self):
         # Create a test page and site settings
-        self.page = Page.objects.create(slug='home', title="test", icon=SimpleUploadedFile("icon.png", b"file_content"))
+        self.page = Page.objects.create(
+            slug='home', title="test", icon=SimpleUploadedFile("icon.png", b"file_content"))
         self.site_settings = SiteSettings.objects.create()
 
     def test_redirect_if_path_is_home(self):
@@ -42,7 +42,8 @@ class AboutViewTest(TestCase):
         about_us = Page.objects.create(title="About Us", slug="about-us",
                                        icon=SimpleUploadedFile("icon.png", b"file_content"))
         # Create a test About object in the database
-        about = About.objects.create(page=about_us, heading="About", body="This is the about page.")
+        about = About.objects.create(
+            page=about_us, heading="About", body="This is the about page.")
 
         # Get the about page
         response = self.client.get(reverse('about'), follow=True)
@@ -85,4 +86,3 @@ class ContactUsViewTest(TestCase):
         self.assertTemplateUsed(response, "pages/contact.html")
         self.assertIn("contact_us_form", response.context)
         self.assertIn("page", response.context)
-
