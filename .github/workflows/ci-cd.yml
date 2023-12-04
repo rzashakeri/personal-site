@@ -65,9 +65,27 @@ jobs:
       - name: Run Tests
         run: coverage run manage.py test
 
-      - name: coverage
+      - name: show coverage report
         run: coverage report
 
+      - name: generate coverage report
+        run: coverage xml -i
+
+      - name: coveralls
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            path_magic_file: ${{ github.workspace }}\\tests\\files\\magic.mgc
+        run: coveralls --service=github
+
+      - name: Coveralls Finished report
+        uses: AndreMiras/coveralls-python-action@develop
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          parallel: true
+          parallel-finished: true
+          flag-name: github_action_tests
+          base-path: '.'
+          debug: true
 
   
   deploy:
