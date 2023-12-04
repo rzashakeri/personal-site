@@ -12,6 +12,7 @@ from pages.models import SiteSettings
 
 class HomeViewTest(TestCase):
     """ """
+
     def setUp(self):
         """ """
         # Create a test page and site settings
@@ -48,6 +49,7 @@ class HomeViewTest(TestCase):
 
 class AboutViewTest(TestCase):
     """ """
+
     def test_get_about_page(self):
         """ """
         # Create a test "about-us" page in the database
@@ -57,9 +59,9 @@ class AboutViewTest(TestCase):
             icon=SimpleUploadedFile("icon.png", b"file_content"),
         )
         # Create a test About object in the database
-        about = About.objects.create(
-            page=about_us, heading="About", body="This is the about page."
-        )
+        about = About.objects.create(page=about_us,
+                                     heading="About",
+                                     body="This is the about page.")
 
         # Get the about page
         response = self.client.get(reverse("about"), follow=True)
@@ -91,6 +93,7 @@ class AboutViewTest(TestCase):
 
 class ContactUsViewTest(TestCase):
     """ """
+
     def setUp(self):
         """ """
         self.page = Page.objects.create(
