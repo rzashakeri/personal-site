@@ -1,17 +1,11 @@
-from django.contrib import messages
-from django.contrib.messages import get_messages
-from django.contrib.messages.storage.fallback import FallbackStorage
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.http import Http404
-from django.test import TestCase, RequestFactory
+from django.test import TestCase
 from django.urls import reverse
-from django.core.mail import outbox
-from django.utils.html import strip_tags
 from captcha.conf import settings as captcha_settings
 
 from pages.forms import ContactUsModelForm
-from pages.models import Page, SiteSettings, About
-from pages.views import ContactUsView
+from pages.models import Page, SiteSettings, About, ContactUs
+
 
 
 class HomeViewTest(TestCase):
@@ -25,7 +19,7 @@ class HomeViewTest(TestCase):
         response = self.client.get('/home/', follow=True)
 
         # Check that the response is a redirect to the "home" URL
-        self.assertRedirects(response, reverse('home'), status_code=301)
+        self.assertRedirects(response, reverse('index'), status_code=301)
 
     def test_get_view_with_valid_path(self):
         # Issue a GET request to the view with a valid path
