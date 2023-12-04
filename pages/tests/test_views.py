@@ -8,7 +8,9 @@ from pages.models import About, ContactUs, Page, SiteSettings
 
 
 class HomeViewTest(TestCase):
+    """ """
     def setUp(self):
+        """ """
         # Create a test page and site settings
         self.page = Page.objects.create(
             slug="home",
@@ -18,6 +20,7 @@ class HomeViewTest(TestCase):
         self.site_settings = SiteSettings.objects.create()
 
     def test_redirect_if_path_is_home(self):
+        """ """
         # Issue a GET request to the view with path "/home/"
         response = self.client.get("/home/", follow=True)
 
@@ -25,6 +28,7 @@ class HomeViewTest(TestCase):
         self.assertRedirects(response, reverse("index"), status_code=301)
 
     def test_get_view_with_valid_path(self):
+        """ """
         # Issue a GET request to the view with a valid path
         response = self.client.get("/", follow=True)
 
@@ -40,7 +44,9 @@ class HomeViewTest(TestCase):
 
 
 class AboutViewTest(TestCase):
+    """ """
     def test_get_about_page(self):
+        """ """
         # Create a test "about-us" page in the database
         about_us = Page.objects.create(
             title="About Us",
@@ -66,6 +72,7 @@ class AboutViewTest(TestCase):
         self.assertEqual(response.context["about"], about)
 
     def test_get_about_page_with_no_about_object(self):
+        """ """
         # Delete the about object from the database
         About.objects.all().delete()
 
@@ -80,7 +87,9 @@ class AboutViewTest(TestCase):
 
 
 class ContactUsViewTest(TestCase):
+    """ """
     def setUp(self):
+        """ """
         self.page = Page.objects.create(
             title="Contact Us",
             slug="contact-us",
@@ -90,6 +99,7 @@ class ContactUsViewTest(TestCase):
         self.url = reverse("contact_us")
 
     def test_get_contact_us_page(self):
+        """ """
         # Test that the contact us page is rendered correctly
         response = self.client.get(reverse("contact_us"), follow=True)
         self.assertEqual(response.status_code, 200)
