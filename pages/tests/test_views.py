@@ -1,14 +1,11 @@
-from django.contrib import messages
-from django.contrib.messages import get_messages
-from django.contrib.messages.storage.fallback import FallbackStorage
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.http import Http404
-from django.test import TestCase, RequestFactory
+from django.test import TestCase
 from django.urls import reverse
+from captcha.conf import settings as captcha_settings
 
 from pages.forms import ContactUsModelForm
-from pages.models import Page, SiteSettings, About
-from pages.views import ContactUsView
+from pages.models import Page, SiteSettings, About, ContactUs
+
 
 
 class HomeViewTest(TestCase):
@@ -22,7 +19,7 @@ class HomeViewTest(TestCase):
         response = self.client.get('/home/', follow=True)
 
         # Check that the response is a redirect to the "home" URL
-        self.assertRedirects(response, reverse('home'), status_code=301)
+        self.assertRedirects(response, reverse('index'), status_code=301)
 
     def test_get_view_with_valid_path(self):
         # Issue a GET request to the view with a valid path
@@ -78,6 +75,7 @@ class ContactUsViewTest(TestCase):
     def setUp(self):
         self.page = Page.objects.create(title="Contact Us", slug='contact-us',
                                         icon=SimpleUploadedFile("icon.png", b"file_content"))
+        captcha_settings.CAPTCHA_TEST_MODE = True
         self.url = reverse('contact_us')
 
     def test_get_method(self):
@@ -87,3 +85,10 @@ class ContactUsViewTest(TestCase):
         self.assertTemplateUsed(response, 'pages/contact.html')
         self.assertIsInstance(response.context['contact_us_form'], ContactUsModelForm)
         self.assertEqual(response.context['page'], self.page)
+    def test_get_contact_us_page(self):
+        # Test that the contact us page is rendered correctly
+        response = self.client.get(reverse("contact_us"), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "pages/contact.html")
+        self.assertIn("contact_us_form", response.context)
+        self.assertIn("page", response.context)

@@ -30,7 +30,7 @@ class HomeView(View):
 
         # Redirect to the "home" URL if the current path is "/home/"
         if request.path == "/home/":
-            return redirect(reverse("home"))
+            return redirect(reverse("index"))
 
         # Retrieve the "home" page object
         home = get_object_or_404(Page, slug="home")
@@ -110,7 +110,7 @@ class ContactUsView(View):
             )
 
             # Redirect the user to the home page
-            return redirect(reverse("home"))
+            return redirect(reverse("index"))
 
         # If the form data is not valid, render the contact.html template with the context
         return render(request, "pages/contact.html", context=context)
