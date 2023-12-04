@@ -1,10 +1,10 @@
+from captcha.conf import settings as captcha_settings
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from django.urls import reverse
-from captcha.conf import settings as captcha_settings
 
 from pages.forms import ContactUsModelForm
-from pages.models import Page, SiteSettings, About, ContactUs
+from pages.models import About, ContactUs, Page, SiteSettings
 
 
 class HomeViewTest(TestCase):
