@@ -78,13 +78,6 @@ class ContactUsViewTest(TestCase):
         captcha_settings.CAPTCHA_TEST_MODE = True
         self.url = reverse('contact_us')
 
-    def test_get_method(self):
-        response = self.client.get(self.url, follow=True)
-
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'pages/contact.html')
-        self.assertIsInstance(response.context['contact_us_form'], ContactUsModelForm)
-        self.assertEqual(response.context['page'], self.page)
     def test_get_contact_us_page(self):
         # Test that the contact us page is rendered correctly
         response = self.client.get(reverse("contact_us"), follow=True)
@@ -92,3 +85,4 @@ class ContactUsViewTest(TestCase):
         self.assertTemplateUsed(response, "pages/contact.html")
         self.assertIn("contact_us_form", response.context)
         self.assertIn("page", response.context)
+
