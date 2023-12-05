@@ -15,75 +15,88 @@ class HomeViewTest(TestCase):
     def setUp(self):
         # Create a test page and site settings
         self.page = Page.objects.create(
-            slug='home', title="test", icon=SimpleUploadedFile("icon.png", b"file_content"))
+            slug="home",
+            title="test",
+            icon=SimpleUploadedFile("icon.png", b"file_content"),
+        )
         self.site_settings = SiteSettings.objects.create()
 
     def test_redirect_if_path_is_home(self):
         # Issue a GET request to the view with path "/home/"
-        response = self.client.get('/home/', follow=True)
+        response = self.client.get("/home/", follow=True)
 
         # Check that the response is a redirect to the "home" URL
-        self.assertRedirects(response, reverse('index'))
+        self.assertRedirects(response, reverse("index"))
 
     def test_get_view_with_valid_path(self):
         # Issue a GET request to the view with a valid path
-        response = self.client.get('/', follow=True)
+        response = self.client.get("/", follow=True)
 
         # Check that the response status code is 200 (OK)
         self.assertEqual(response.status_code, 200)
 
         # Check that the correct template is used
-        self.assertTemplateUsed(response, 'pages/index.html')
+        self.assertTemplateUsed(response, "pages/index.html")
 
         # Check that the context contains the expected page and portfolio objects
-        self.assertEqual(response.context['page'], self.page)
-        self.assertEqual(response.context['portfolio'], self.site_settings)
+        self.assertEqual(response.context["page"], self.page)
+        self.assertEqual(response.context["portfolio"], self.site_settings)
 
 
 class AboutViewTest(TestCase):
     def test_get_about_page(self):
         # Create a test "about-us" page in the database
-        about_us = Page.objects.create(title="About Us", slug="about-us",
-                                       icon=SimpleUploadedFile("icon.png", b"file_content"))
+        about_us = Page.objects.create(
+            title="About Us",
+            slug="about-us",
+            icon=SimpleUploadedFile("icon.png", b"file_content"),
+        )
         # Create a test About object in the database
         about = About.objects.create(
-            page=about_us, heading="About", body="This is the about page.")
+            page=about_us, heading="About", body="This is the about page."
+        )
 
         # Get the about page
-        response = self.client.get(reverse('about'), follow=True)
+        response = self.client.get(reverse("about"), follow=True)
 
         # Check that the response status code is 200
         self.assertEqual(response.status_code, 200)
 
         # Check that the correct template is used
-        self.assertTemplateUsed(response, 'pages/about.html')
+        self.assertTemplateUsed(response, "pages/about.html")
 
         # Check that the correct context is used
-        self.assertEqual(response.context['page'], about_us)
-        self.assertEqual(response.context['about'], about)
+        self.assertEqual(response.context["page"], about_us)
+        self.assertEqual(response.context["about"], about)
 
     def test_get_about_page_with_no_about_object(self):
         # Delete the about object from the database
         About.objects.all().delete()
 
         # Get the about page
-        response = self.client.get(reverse('about'), follow=True)
+        response = self.client.get(reverse("about"), follow=True)
 
         # Check that the response status code is 200
         self.assertEqual(response.status_code, 404)
 
         # Check that the about object is not in the context
-        self.assertNotIn('about', response.context)
+        self.assertNotIn("about", response.context)
 
 
 class ContactUsViewTest(TestCase):
     def setUp(self):
         self.home_page = Page.objects.create(
-            slug='home', title="test", icon=SimpleUploadedFile("icon.png", b"file_content"))
-        self.page = Page.objects.create(title="Contact Us", slug='contact-us',
-                                        icon=SimpleUploadedFile("icon.png", b"file_content"))
+            slug="home",
+            title="test",
+            icon=SimpleUploadedFile("icon.png", b"file_content"),
+        )
+        self.page = Page.objects.create(
+            title="Contact Us",
+            slug="contact-us",
+            icon=SimpleUploadedFile("icon.png", b"file_content"),
+        )
         captcha_settings.CAPTCHA_TEST_MODE = True
-        self.url = reverse('contact_us')
+        self.url = reverse("contact_us")
 
     def test_get_contact_us_page(self):
         # Test that the contact us page is rendered correctly
@@ -103,12 +116,11 @@ class ContactUsViewTest(TestCase):
             "captcha_0": "8e10ebf60c5f23fd6e6a9959853730cd69062a15",
             "captcha_1": "PASSED",
         }
-        response = self.client.post(
-            reverse("contact_us"), data=data, follow=True)
+        response = self.client.post(reverse("contact_us"), data=data, follow=True)
         self.assertEqual(response.status_code, 200)
-        messages = list(response.context['messages'])
+        messages = list(response.context["messages"])
         self.assertEqual(len(messages), 1)
-        self.assertEqual(str(messages[0]), 'Message sent successfully')
+        self.assertEqual(str(messages[0]), "Message sent successfully")
         self.assertIn("page", response.context)
 
     def test_post_invalid_contact_form(self):
@@ -118,8 +130,7 @@ class ContactUsViewTest(TestCase):
             "email": "invalidemail",
             "message": "",
         }
-        response = self.client.post(
-            reverse("contact_us"), data=data, follow=True)
+        response = self.client.post(reverse("contact_us"), data=data, follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "pages/contact.html")
         self.assertEqual(len(outbox), 0)
