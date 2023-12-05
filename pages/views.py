@@ -165,12 +165,28 @@ class ProjectView(View):
         # Render the project.html template with the provided context
         return render(request, "pages/project.html", context=context)
 
-
 class SkillsView(View):
+    """
+    Retrieves the page object with the slug "skills" and the skill categories ordered by name.
+
+    Parameters:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The rendered "skills.html" template with the page and skill category objects in the context.
+    """
+
     def get(self, request):
-        page = Page.objects.get(slug="skills")
+        # Retrieve the page object with the slug "skills"
+        page = get_object_or_404(Page, slug="skills")
+
+        # Retrieve all skill categories and order them by name
         skill_category = SkillCategory.objects.all().order_by("name")
+
+        # Create a context dictionary with the page and skill category objects
         context = {"page": page, "skill_category": skill_category}
+
+        # Render the "skills.html" template with the context
         return render(request, "pages/skills.html", context=context)
 
 
