@@ -1,5 +1,5 @@
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.test import TestCase
+from django.test import TestCase, Client
 from django.urls import reverse
 from django.core.mail import outbox
 from django.contrib.messages import get_messages
@@ -7,7 +7,7 @@ from django.conf import settings
 from captcha.conf import settings as captcha_settings
 
 from pages.forms import ContactUsModelForm
-from pages.models import Page, SiteSettings, About, ContactUs
+from pages.models import Page, SiteSettings, About, ContactUs, Project
 from pages.views import ContactUsView
 
 
@@ -154,3 +154,33 @@ class ProjectsViewTest(TestCase):
 
         # Check that the response has status code 404 (Not Found)
         self.assertEqual(response.status_code, 404)
+
+
+
+class ProjectViewTest(TestCase):
+    def setUp(self):
+        # Create a test page
+        self.page = Page.objects.create(title='Test Page', slug='test-page', icon=SimpleUploadedFile("icon.png", b"file_content"))
+
+        # Create a test project
+        self.project = Project.objects.create(
+            name='Test Project',
+            slug='test-project',
+            description='Test description',
+            page=self.page,
+            star_count=1,
+            fork_count=1
+        )
+
+
+    def test_project_view(self):
+        # Test that the project view returns a 200 status code
+        url = reverse('project', args=[self.project.slug])
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+        # Test that the project view displays the correct project
+        self.assertEqual(response.context['project'], self.project)
+
+        # Test that the project view displays the correct page
+        self.assertEqual(response.context['page'], self.page)
