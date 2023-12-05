@@ -7,7 +7,7 @@ from django.conf import settings
 from captcha.conf import settings as captcha_settings
 
 from pages.forms import ContactUsModelForm
-from pages.models import Page, SiteSettings, About, ContactUs, Project
+from pages.models import Page, SiteSettings, About, ContactUs, Project, SkillCategory
 from pages.views import ContactUsView
 
 
@@ -183,4 +183,25 @@ class ProjectViewTest(TestCase):
         self.assertEqual(response.context['project'], self.project)
 
         # Test that the project view displays the correct page
+        self.assertEqual(response.context['page'], self.page)
+
+
+
+class SkillsViewTest(TestCase):
+    def setUp(self):
+        # Create a test page
+        self.page = Page.objects.create(title='Test Page', slug='skills', icon=SimpleUploadedFile("icon.png", b"file_content"))
+
+        # Create some test skill categories
+        self.skill_category1 = SkillCategory.objects.create(name='Test Category 1')
+        self.skill_category2 = SkillCategory.objects.create(name='Test Category 2')
+
+
+    def test_skills_view(self):
+        # Test that the skills view returns a 200 status code
+        url = reverse('skills')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+        # Test that the skills view displays the correct page
         self.assertEqual(response.context['page'], self.page)
