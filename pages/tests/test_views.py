@@ -130,3 +130,27 @@ class ContactUsViewTest(TestCase):
         # Test that the contact us view instance is created correctly
         view = ContactUsView()
         self.assertIsInstance(view, ContactUsView)
+
+
+
+class ProjectsViewTest(TestCase):
+
+    def test_get(self):
+        # Create a page with slug "projects"
+        page = Page.objects.create(slug="projects", title="Projects", icon=SimpleUploadedFile("icon.png", b"file_content"))
+
+        # Create a GET request
+        response = self.client.get(reverse('projects'))
+
+        # Check that the response has status code 200 (OK)
+        self.assertEqual(response.status_code, 200)
+        # Check that the page object is passed to the template context
+        self.assertEqual(response.context['page'], page)
+
+
+    def test_get_page_not_found(self):
+        # Create a GET request
+        response = self.client.get(reverse('projects'))
+
+        # Check that the response has status code 404 (Not Found)
+        self.assertEqual(response.status_code, 404)

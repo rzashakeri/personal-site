@@ -45,7 +45,6 @@ class HomeView(View):
         return render(request, "pages/index.html", context=context)
 
 
-
 class AboutView(View):
     """
     Retrieves the "about-us" page from the database along with the first About object.
@@ -74,6 +73,7 @@ class ContactUsView(View):
     - contact_us_form: An instance of the ContactUsModelForm
     - page: The Page object with slug "contact-us"
     """
+
     def get(self, request):
         # Create an instance of the ContactUsModelForm
         contact_us_form = ContactUsModelForm()
@@ -117,10 +117,27 @@ class ContactUsView(View):
 
 
 class ProjectsView(View):
+    """
+    A class-based view for handling the GET request to display projects.
+
+    Attributes:
+        None
+
+    Methods:
+        get: Retrieves the page and projects, creates a context dictionary, and renders the projects.html template.
+
+    """
     def get(self, request):
-        page = Page.objects.get(slug="projects")
+        # Get the page with slug "projects"
+        page = get_object_or_404(Page, slug="projects")
+
+        # Get all projects and order them by star count in descending order
         projects = Project.objects.all().order_by("-star_count")
+
+        # Create a context dictionary with the page and projects
         context = {"page": page, "projects": projects}
+
+        # Render the projects.html template with the context
         return render(request, "pages/projects.html", context=context)
 
 
