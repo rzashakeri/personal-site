@@ -12,7 +12,9 @@ from pages.views import ContactUsView
 
 
 class HomeViewTest(TestCase):
+    """ """
     def setUp(self):
+        """ """
         # Create a test page and site settings
         self.page = Page.objects.create(
             slug="home",
@@ -22,6 +24,7 @@ class HomeViewTest(TestCase):
         self.site_settings = SiteSettings.objects.create()
 
     def test_redirect_if_path_is_home(self):
+        """ """
         # Issue a GET request to the view with path "/home/"
         response = self.client.get("/home/", follow=True)
 
@@ -29,6 +32,7 @@ class HomeViewTest(TestCase):
         self.assertRedirects(response, reverse("index"))
 
     def test_get_view_with_valid_path(self):
+        """ """
         # Issue a GET request to the view with a valid path
         response = self.client.get("/", follow=True)
 
@@ -44,7 +48,9 @@ class HomeViewTest(TestCase):
 
 
 class AboutViewTest(TestCase):
+    """ """
     def test_get_about_page(self):
+        """ """
         # Create a test "about-us" page in the database
         about_us = Page.objects.create(
             title="About Us",
@@ -70,6 +76,7 @@ class AboutViewTest(TestCase):
         self.assertEqual(response.context["about"], about)
 
     def test_get_about_page_with_no_about_object(self):
+        """ """
         # Delete the about object from the database
         About.objects.all().delete()
 
@@ -84,7 +91,9 @@ class AboutViewTest(TestCase):
 
 
 class ContactUsViewTest(TestCase):
+    """ """
     def setUp(self):
+        """ """
         self.home_page = Page.objects.create(
             slug="home",
             title="test",
@@ -99,6 +108,7 @@ class ContactUsViewTest(TestCase):
         self.url = reverse("contact_us")
 
     def test_get_contact_us_page(self):
+        """ """
         # Test that the contact us page is rendered correctly
         response = self.client.get(reverse("contact_us"), follow=True)
         self.assertEqual(response.status_code, 200)
@@ -107,6 +117,7 @@ class ContactUsViewTest(TestCase):
         self.assertIn("page", response.context)
 
     def test_post_valid_contact_form(self):
+        """ """
         # Test that a valid contact form submission redirects to the home page and sends an email
         data = {
             "first_name": "Test User first name",
@@ -124,6 +135,7 @@ class ContactUsViewTest(TestCase):
         self.assertIn("page", response.context)
 
     def test_post_invalid_contact_form(self):
+        """ """
         # Test that an invalid contact form submission does not redirect to the home page and does not send an email
         data = {
             "name": "",
@@ -136,11 +148,13 @@ class ContactUsViewTest(TestCase):
         self.assertEqual(len(outbox), 0)
 
     def test_contact_us_form_instance(self):
+        """ """
         # Test that the contact us form instance is created correctly
         form = ContactUsModelForm()
         self.assertIsInstance(form, ContactUsModelForm)
 
     def test_contact_us_view_instance(self):
+        """ """
         # Test that the contact us view instance is created correctly
         view = ContactUsView()
         self.assertIsInstance(view, ContactUsView)
