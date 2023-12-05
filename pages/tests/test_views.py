@@ -7,7 +7,10 @@ from django.test import TestCase
 from django.urls import reverse
 
 from pages.forms import ContactUsModelForm
-from pages.models import About, ContactUs, Page, SiteSettings
+from pages.models import About
+from pages.models import ContactUs
+from pages.models import Page
+from pages.models import SiteSettings
 from pages.views import ContactUsView
 
 
