@@ -14,7 +14,8 @@ from pages.views import ContactUsView
 class HomeViewTest(TestCase):
     def setUp(self):
         # Create a test page and site settings
-        self.page = Page.objects.create(slug='home', title="test", icon=SimpleUploadedFile("icon.png", b"file_content"))
+        self.page = Page.objects.create(
+            slug='home', title="test", icon=SimpleUploadedFile("icon.png", b"file_content"))
         self.site_settings = SiteSettings.objects.create()
 
     def test_redirect_if_path_is_home(self):
@@ -45,7 +46,8 @@ class AboutViewTest(TestCase):
         about_us = Page.objects.create(title="About Us", slug="about-us",
                                        icon=SimpleUploadedFile("icon.png", b"file_content"))
         # Create a test About object in the database
-        about = About.objects.create(page=about_us, heading="About", body="This is the about page.")
+        about = About.objects.create(
+            page=about_us, heading="About", body="This is the about page.")
 
         # Get the about page
         response = self.client.get(reverse('about'), follow=True)
@@ -76,12 +78,12 @@ class AboutViewTest(TestCase):
 
 class ContactUsViewTest(TestCase):
     def setUp(self):
-        self.home_page = Page.objects.create(slug='home', title="test", icon=SimpleUploadedFile("icon.png", b"file_content"))
+        self.home_page = Page.objects.create(
+            slug='home', title="test", icon=SimpleUploadedFile("icon.png", b"file_content"))
         self.page = Page.objects.create(title="Contact Us", slug='contact-us',
                                         icon=SimpleUploadedFile("icon.png", b"file_content"))
         captcha_settings.CAPTCHA_TEST_MODE = True
         self.url = reverse('contact_us')
-
 
     def test_get_contact_us_page(self):
         # Test that the contact us page is rendered correctly
@@ -101,13 +103,13 @@ class ContactUsViewTest(TestCase):
             "captcha_0": "8e10ebf60c5f23fd6e6a9959853730cd69062a15",
             "captcha_1": "PASSED",
         }
-        response = self.client.post(reverse("contact_us"), data=data, follow=True)
+        response = self.client.post(
+            reverse("contact_us"), data=data, follow=True)
         self.assertEqual(response.status_code, 200)
         messages = list(response.context['messages'])
         self.assertEqual(len(messages), 1)
         self.assertEqual(str(messages[0]), 'Message sent successfully')
         self.assertIn("page", response.context)
-
 
     def test_post_invalid_contact_form(self):
         # Test that an invalid contact form submission does not redirect to the home page and does not send an email
@@ -116,7 +118,8 @@ class ContactUsViewTest(TestCase):
             "email": "invalidemail",
             "message": "",
         }
-        response = self.client.post(reverse("contact_us"), data=data, follow=True)
+        response = self.client.post(
+            reverse("contact_us"), data=data, follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "pages/contact.html")
         self.assertEqual(len(outbox), 0)
