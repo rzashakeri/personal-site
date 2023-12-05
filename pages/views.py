@@ -142,14 +142,28 @@ class ProjectsView(View):
 
 
 class ProjectView(View):
+    """
+    A class-based view that displays a project page.
+
+    Attributes:
+        None
+
+    Methods:
+        get: Retrieves the project object based on the slug provided, retrieves the page associated with the project, prepares the context data to be passed to the template, and renders the project.html template with the provided context.
+
+    """
     def get(self, request, slug):
-        try:
-            project = Project.objects.get(slug=slug)
-            page = project.page
-            context = {"page": page, "project": project}
-            return render(request, "pages/project.html", context=context)
-        except ObjectDoesNotExist:
-            return render(request, "404.html")
+        # Retrieve the project object based on the slug provided
+        project = get_object_or_404(Project, slug=slug)
+
+        # Retrieve the page associated with the project
+        page = project.page
+
+        # Prepare the context data to be passed to the template
+        context = {"page": page, "project": project}
+
+        # Render the project.html template with the provided context
+        return render(request, "pages/project.html", context=context)
 
 
 class SkillsView(View):
