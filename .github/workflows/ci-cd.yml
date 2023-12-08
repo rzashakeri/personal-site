@@ -28,7 +28,7 @@ jobs:
 
       - name: Make Migrations
         env:
-          LIARA_TOKEN: ${{ secrets.SENTRY_DSN }}
+          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
         run: python manage.py makemigrations
 
       - name: Migrate Database
