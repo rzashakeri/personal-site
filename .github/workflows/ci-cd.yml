@@ -9,6 +9,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      LIARA_TOKEN: ${{ secrets.SENTRY_DSN }}
     strategy:
       matrix:
         python-version: ["3.8", "3.9", "3.10", "3.11"]
