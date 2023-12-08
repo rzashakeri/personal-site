@@ -40,6 +40,8 @@ jobs:
   
   test:
     needs: build
+    env:
+      SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
