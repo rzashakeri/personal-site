@@ -94,8 +94,6 @@ jobs:
   
   deploy:
     needs: test
-    env:
-      SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -109,6 +107,7 @@ jobs:
       - name: Update Liara and Deploy
         env:
           LIARA_TOKEN: ${{ secrets.LIARA_API_TOKEN }}
+          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
         run: |
           npm install -g @liara/cli@3
           liara deploy --app="rezashakeri" --api-token="$LIARA_TOKEN" --detach
