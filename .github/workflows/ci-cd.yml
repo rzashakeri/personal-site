@@ -8,6 +8,8 @@ on:
 
 jobs:
   build:
+    env:
+      SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -27,8 +29,6 @@ jobs:
           pip install -r requirements.txt
 
       - name: Make Migrations
-        env:
-          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
         run: python manage.py makemigrations
 
       - name: Migrate Database
