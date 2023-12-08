@@ -94,6 +94,8 @@ jobs:
   
   deploy:
     needs: test
+    env:
+      SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
