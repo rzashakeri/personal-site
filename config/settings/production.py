@@ -1,6 +1,7 @@
 from pathlib import Path
 from dotenv import load_dotenv
 import environ
+import sentry_sdk
 
 load_dotenv()
 
@@ -366,3 +367,16 @@ SESSION_COOKIE_HTTPONLY = True
 CSRF_COOKIE_HTTPONLY = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#x-frame-options
 X_FRAME_OPTIONS = "DENY"
+
+# SENTRY
+# ------------------------------------------------------------------------------
+sentry_sdk.init(
+    dsn=env("SENTRY_DSN", default='SENTRY_DSN_KEY'),
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    traces_sample_rate=1.0,
+    # Set profiles_sample_rate to 1.0 to profile 100%
+    # of sampled transactions.
+    # We recommend adjusting this value in production.
+    profiles_sample_rate=1.0,
+)
