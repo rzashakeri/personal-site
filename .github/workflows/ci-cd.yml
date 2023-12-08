@@ -9,8 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      LIARA_TOKEN: ${{ secrets.SENTRY_DSN }}
     strategy:
       matrix:
         python-version: ["3.8", "3.9", "3.10", "3.11"]
@@ -29,6 +27,8 @@ jobs:
           pip install -r requirements.txt
 
       - name: Make Migrations
+        env:
+          LIARA_TOKEN: ${{ secrets.SENTRY_DSN }}
         run: python manage.py makemigrations
 
       - name: Migrate Database
