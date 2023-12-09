@@ -1,7 +1,8 @@
 from pathlib import Path
-from dotenv import load_dotenv
+
 import environ
 import sentry_sdk
+from dotenv import load_dotenv
 
 load_dotenv()
 
