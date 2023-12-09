@@ -371,7 +371,7 @@ X_FRAME_OPTIONS = "DENY"
 # SENTRY
 # ------------------------------------------------------------------------------
 sentry_sdk.init(
-    dsn=env("SENTRY_DSN", default='SENTRY_DSN_KEY'),
+    dsn=env("SENTRY_DSN", default='https://0cff28b5fc3edb790db73995bc4b9fe4@o4505345204224000.ingest.sentry.io/4506361942441984'),
     # Set traces_sample_rate to 1.0 to capture 100%
     # of transactions for performance monitoring.
     traces_sample_rate=1.0,
