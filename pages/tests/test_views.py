@@ -1,13 +1,14 @@
-from django.core.files.uploadedfile import SimpleUploadedFile
-from django.test import TestCase, Client
-from django.urls import reverse
-from django.core.mail import outbox
-from django.contrib.messages import get_messages
-from django.conf import settings
 from captcha.conf import settings as captcha_settings
+from django.conf import settings
+from django.contrib.messages import get_messages
+from django.core.files.uploadedfile import SimpleUploadedFile
+from django.core.mail import outbox
+from django.test import Client, TestCase
+from django.urls import reverse
 
 from pages.forms import ContactUsModelForm
-from pages.models import Page, SiteSettings, About, ContactUs, Project, SkillCategory
+from pages.models import (About, ContactUs, Page, Project, SiteSettings,
+                          SkillCategory)
 from pages.views import ContactUsView
 
 
