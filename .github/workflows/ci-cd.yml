@@ -11,6 +11,14 @@ jobs:
     env:
       SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
       REDIS_URL: ${{ secrets.REDIS_URL }}
+      DJANGO_ADMIN_URL: ${{ secrets.DJANGO_ADMIN_URL }}
+      DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+      DJANGO_LIARA_ENDPOINT:  ${{ secrets.DJANGO_LIARA_ENDPOINT }}
+      DJANGO_LIARA_BUCKET_NAME: ${{ secrets.DJANGO_LIARA_BUCKET_NAME }}
+      DJANGO_LIARA_ACCESS_KEY: ${{ secrets.DJANGO_LIARA_ACCESS_KEY }}
+      DJANGO_LIARA_SECRET_KEY: ${{ secrets.DJANGO_LIARA_SECRET_KEY }}
+      DJANGO_SETTINGS_MODULE: ${{ secrets.DJANGO_SETTINGS_MODULE }}
+
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -44,6 +52,14 @@ jobs:
     env:
       SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
       REDIS_URL: ${{ secrets.REDIS_URL }}
+      DJANGO_ADMIN_URL: ${{ secrets.DJANGO_ADMIN_URL }}
+      DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+      DJANGO_LIARA_ENDPOINT:  ${{ secrets.DJANGO_LIARA_ENDPOINT }}
+      DJANGO_LIARA_BUCKET_NAME: ${{ secrets.DJANGO_LIARA_BUCKET_NAME }}
+      DJANGO_LIARA_ACCESS_KEY: ${{ secrets.DJANGO_LIARA_ACCESS_KEY }}
+      DJANGO_LIARA_SECRET_KEY: ${{ secrets.DJANGO_LIARA_SECRET_KEY }}
+      DJANGO_SETTINGS_MODULE: ${{ secrets.DJANGO_SETTINGS_MODULE }}
+
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -111,6 +127,14 @@ jobs:
           LIARA_TOKEN: ${{ secrets.LIARA_API_TOKEN }}
           SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
           REDIS_URL: ${{ secrets.REDIS_URL }}
+          DJANGO_ADMIN_URL: ${{ secrets.DJANGO_ADMIN_URL }}
+          DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+          DJANGO_LIARA_ENDPOINT:  ${{ secrets.DJANGO_LIARA_ENDPOINT }}
+          DJANGO_LIARA_BUCKET_NAME: ${{ secrets.DJANGO_LIARA_BUCKET_NAME }}
+          DJANGO_LIARA_ACCESS_KEY: ${{ secrets.DJANGO_LIARA_ACCESS_KEY }}
+          DJANGO_LIARA_SECRET_KEY: ${{ secrets.DJANGO_LIARA_SECRET_KEY }}
+          DJANGO_SETTINGS_MODULE: ${{ secrets.DJANGO_SETTINGS_MODULE }}
+
         run: |
           npm install -g @liara/cli@3
           liara deploy --app="rezashakeri" --api-token="$LIARA_TOKEN" --detach
