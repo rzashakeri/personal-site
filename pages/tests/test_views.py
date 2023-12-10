@@ -3,12 +3,17 @@ from django.conf import settings
 from django.contrib.messages import get_messages
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.mail import outbox
-from django.test import Client, TestCase
+from django.test import Client
+from django.test import TestCase
 from django.urls import reverse
 
 from pages.forms import ContactUsModelForm
-from pages.models import (About, ContactUs, Page, Project, SiteSettings,
-                          SkillCategory)
+from pages.models import About
+from pages.models import ContactUs
+from pages.models import Page
+from pages.models import Project
+from pages.models import SiteSettings
+from pages.models import SkillCategory
 from pages.views import ContactUsView
 
 
