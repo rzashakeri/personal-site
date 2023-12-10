@@ -19,6 +19,7 @@ from pages.views import ContactUsView
 
 class HomeViewTest(TestCase):
     """ """
+
     def setUp(self):
         """ """
         # Create a test page and site settings
@@ -55,6 +56,7 @@ class HomeViewTest(TestCase):
 
 class AboutViewTest(TestCase):
     """ """
+
     def test_get_about_page(self):
         """ """
         # Create a test "about-us" page in the database
@@ -64,9 +66,9 @@ class AboutViewTest(TestCase):
             icon=SimpleUploadedFile("icon.png", b"file_content"),
         )
         # Create a test About object in the database
-        about = About.objects.create(
-            page=about_us, heading="About", body="This is the about page."
-        )
+        about = About.objects.create(page=about_us,
+                                     heading="About",
+                                     body="This is the about page.")
 
         # Get the about page
         response = self.client.get(reverse("about"), follow=True)
@@ -98,6 +100,7 @@ class AboutViewTest(TestCase):
 
 class ContactUsViewTest(TestCase):
     """ """
+
     def setUp(self):
         """ """
         self.home_page = Page.objects.create(
@@ -133,7 +136,9 @@ class ContactUsViewTest(TestCase):
             "captcha_0": "8e10ebf60c5f23fd6e6a9959853730cd69062a15",
             "captcha_1": "PASSED",
         }
-        response = self.client.post(reverse("contact_us"), data=data, follow=True)
+        response = self.client.post(reverse("contact_us"),
+                                    data=data,
+                                    follow=True)
         self.assertEqual(response.status_code, 200)
         messages = list(response.context["messages"])
         self.assertEqual(len(messages), 1)
@@ -148,7 +153,9 @@ class ContactUsViewTest(TestCase):
             "email": "invalidemail",
             "message": "",
         }
-        response = self.client.post(reverse("contact_us"), data=data, follow=True)
+        response = self.client.post(reverse("contact_us"),
+                                    data=data,
+                                    follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "pages/contact.html")
         self.assertEqual(len(outbox), 0)
@@ -168,6 +175,7 @@ class ContactUsViewTest(TestCase):
 
 class ProjectsViewTest(TestCase):
     """ """
+
     def test_get(self):
         """ """
         # Create a page with slug "projects"
@@ -188,6 +196,7 @@ class ProjectsViewTest(TestCase):
 
 class ProjectViewTest(TestCase):
     """ """
+
     def setUp(self):
         """ """
         # Create a test page
@@ -223,6 +232,7 @@ class ProjectViewTest(TestCase):
 
 class SkillsViewTest(TestCase):
     """ """
+
     def setUp(self):
         """ """
         # Create a test page
@@ -233,8 +243,10 @@ class SkillsViewTest(TestCase):
         )
 
         # Create some test skill categories
-        self.skill_category1 = SkillCategory.objects.create(name="Test Category 1")
-        self.skill_category2 = SkillCategory.objects.create(name="Test Category 2")
+        self.skill_category1 = SkillCategory.objects.create(
+            name="Test Category 1")
+        self.skill_category2 = SkillCategory.objects.create(
+            name="Test Category 2")
 
     def test_skills_view(self):
         """ """
