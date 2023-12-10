@@ -10,6 +10,7 @@ jobs:
   build:
     env:
       SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+      REDIS_URL: ${{ secrets.REDIS_URL }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -42,6 +43,7 @@ jobs:
     needs: build
     env:
       SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+      REDIS_URL: ${{ secrets.REDIS_URL }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -108,6 +110,7 @@ jobs:
         env:
           LIARA_TOKEN: ${{ secrets.LIARA_API_TOKEN }}
           SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+          REDIS_URL: ${{ secrets.REDIS_URL }}
         run: |
           npm install -g @liara/cli@3
           liara deploy --app="rezashakeri" --api-token="$LIARA_TOKEN" --detach
