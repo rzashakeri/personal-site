@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.views import View
 from django.views.generic import TemplateView
 from django.shortcuts import get_object_or_404
+from django.core.cache import cache
 
 from blog.models import Post
 from pages.forms import ContactUsModelForm
@@ -22,25 +23,28 @@ class HomeView(View):
     def get(self, request):
         """
         Handle GET requests for the view.
-
         Redirect to the "home" URL if the current path is "/home/".
         Retrieve the "home" page object and the site settings object.
         Render the index.html template with the context data.
         """
-
         # Redirect to the "home" URL if the current path is "/home/"
         if request.path == "/home/":
-            return redirect(reverse("index"))
+            return redirect("index")
 
-        # Retrieve the "home" page object
-        home = get_object_or_404(Page, slug="home")
+        # Retrieve the "home" page object from cache or database
+        home = cache.get("home")
+        if not home:
+            home = get_object_or_404(Page, slug="home")
+            cache.set("home", home)
 
-        # Retrieve the site settings object
-        portfolio = SiteSettings.objects.first()
+        # Retrieve the site settings object from cache or database
+        portfolio = cache.get("site_settings")
+        if not portfolio:
+            portfolio = SiteSettings.objects.first()
+            cache.set("site_settings", portfolio)
 
         # Create a context dictionary with the page and portfolio objects
         context = {"page": home, "portfolio": portfolio}
-
         # Render the index.html template with the context data
         return render(request, "pages/index.html", context=context)
 
@@ -127,6 +131,7 @@ class ProjectsView(View):
         get: Retrieves the page and projects, creates a context dictionary, and renders the projects.html template.
 
     """
+
     def get(self, request):
         # Get the page with slug "projects"
         page = get_object_or_404(Page, slug="projects")
@@ -152,6 +157,7 @@ class ProjectView(View):
         get: Retrieves the project object based on the slug provided, retrieves the page associated with the project, prepares the context data to be passed to the template, and renders the project.html template with the provided context.
 
     """
+
     def get(self, request, slug):
         # Retrieve the project object based on the slug provided
         project = get_object_or_404(Project, slug=slug)
@@ -164,6 +170,7 @@ class ProjectView(View):
 
         # Render the project.html template with the provided context
         return render(request, "pages/project.html", context=context)
+
 
 class SkillsView(View):
     """
