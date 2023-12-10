@@ -114,9 +114,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
-    'django.middleware.cache.UpdateCacheMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 # STATIC
@@ -294,8 +291,6 @@ CACHES = {
         },
     }
 }
-
-CACHE_MIDDLEWARE_SECONDS = 600
 
 # EMAIL
 # ------------------------------------------------------------------------------
