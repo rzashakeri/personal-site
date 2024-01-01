@@ -1226,6 +1226,20 @@ input[type=text], input[type=email], textarea {
     margin-bottom: 20px;
 }
 
+.post-head {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.post-view {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'Open Sans', sans-serif;
+    color: var(--color-text-primary);
+}
+
 /* ================================================ */
 /* captcha */
 /* ================================================ */
