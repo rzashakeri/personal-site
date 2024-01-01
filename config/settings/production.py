@@ -191,7 +191,7 @@ STORAGES = {"default": {"BACKEND": "storages.backends.s3boto3.S3Boto3Storage"}}
 LIARA_ENDPOINT = env("DJANGO_LIARA_ENDPOINT", default="storage.iran.liara.space")
 LIARA_BUCKET_NAME = env("DJANGO_LIARA_BUCKET_NAME", default="public-static-rezashakeri")
 LIARA_ACCESS_KEY = env("DJANGO_LIARA_ACCESS_KEY", default="qta221ca7mr5srrl")
-LIARA_SECRET_KEY = env("DJANGO_LIARA_SECRET_KEY", default="bcd20101-29c7-4d43-87ef-a9e4891444d8")
+LIARA_SECRET_KEY = env("DJANGO_LIARA_SECRET_KEY", default="13459dd8-2a02-4d70-8e06-b39c1935a0c8")
 
 AWS_S3_ENDPOINT_URL = "https://" + LIARA_ENDPOINT
 AWS_STORAGE_BUCKET_NAME = LIARA_BUCKET_NAME
