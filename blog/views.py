@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 from django.views import View
-from .models import Post
+
+from utils import get_client_ip
+from .models import Post, Visit
 
 
 class PostView(View):
@@ -10,6 +12,9 @@ class PostView(View):
     def get(self, request, slug):
         # Retrieve the post object with the given slug from the database
         post = get_object_or_404(Post, slug=slug)
+
+        # create visit object
+        Visit.objects.get_or_create(post=post, ip_address=get_client_ip(request))
 
         # Create a context dictionary with the post object
         context = {"page": post}

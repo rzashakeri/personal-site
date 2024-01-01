@@ -2,6 +2,7 @@ from django.db import models
 from ckeditor.fields import RichTextField
 from autoslug import AutoSlugField
 
+
 class Post(models.Model):
     """
     Post model
@@ -13,6 +14,10 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     tags = models.ManyToManyField("Tag", blank=True)
+
+    @property
+    def visit_count(self):
+        return Visit.objects.filter(post=self).count()
 
     def __str__(self):
         return self.title
@@ -36,3 +41,18 @@ class Tag(models.Model):
 
     class Meta:
         ordering = ['name']
+
+
+class Visit(models.Model):
+    """
+    View model
+    """
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    ip_address = models.GenericIPAddressField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.post.title} - {self.ip_address}"
+
+    class Meta:
+        ordering = ['-created_at']
