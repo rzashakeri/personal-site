@@ -18,9 +18,8 @@ if READ_DOT_ENV_FILE:
 # GENERAL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
-SECRET_KEY = env(
-    "DJANGO_SECRET_KEY", default="udb148aof460ys#vwo!*aj*@i%!y6bthdkk!4%j2p7@^ki7m08"
-)
+SECRET_KEY = env("DJANGO_SECRET_KEY",
+                 default="udb148aof460ys#vwo!*aj*@i%!y6bthdkk!4%j2p7@^ki7m08")
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=[".rezashakeri.com"])
 
@@ -97,11 +96,21 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+        "NAME":
+        "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
     },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
+    {
+        "NAME":
+        "django.contrib.auth.password_validation.MinimumLengthValidator"
+    },
+    {
+        "NAME":
+        "django.contrib.auth.password_validation.CommonPasswordValidator"
+    },
+    {
+        "NAME":
+        "django.contrib.auth.password_validation.NumericPasswordValidator"
+    },
 ]
 
 # MIDDLEWARE
@@ -189,12 +198,13 @@ MANAGERS = ADMINS
 # https://django-storages.readthedocs.io/en/latest/#installation
 INSTALLED_APPS += ["storages"]  # noqa: F405
 STORAGES = {"default": {"BACKEND": "storages.backends.s3boto3.S3Boto3Storage"}}
-LIARA_ENDPOINT = env("DJANGO_LIARA_ENDPOINT", default="storage.iran.liara.space")
-LIARA_BUCKET_NAME = env("DJANGO_LIARA_BUCKET_NAME", default="public-static-rezashakeri")
+LIARA_ENDPOINT = env("DJANGO_LIARA_ENDPOINT",
+                     default="storage.iran.liara.space")
+LIARA_BUCKET_NAME = env("DJANGO_LIARA_BUCKET_NAME",
+                        default="public-static-rezashakeri")
 LIARA_ACCESS_KEY = env("DJANGO_LIARA_ACCESS_KEY", default="qta221ca7mr5srrl")
-LIARA_SECRET_KEY = env(
-    "DJANGO_LIARA_SECRET_KEY", default="13459dd8-2a02-4d70-8e06-b39c1935a0c8"
-)
+LIARA_SECRET_KEY = env("DJANGO_LIARA_SECRET_KEY",
+                       default="13459dd8-2a02-4d70-8e06-b39c1935a0c8")
 
 AWS_S3_ENDPOINT_URL = "https://" + LIARA_ENDPOINT
 AWS_STORAGE_BUCKET_NAME = LIARA_BUCKET_NAME
@@ -210,17 +220,18 @@ STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 # ------------------------------------------------------------------------------
 # ckeditor config
 CKEDITOR_BASEPATH = (
-    f"{AWS_S3_ENDPOINT_URL}/{LIARA_BUCKET_NAME}/static/ckeditor/ckeditor/"
-)
+    f"{AWS_S3_ENDPOINT_URL}/{LIARA_BUCKET_NAME}/static/ckeditor/ckeditor/")
 
 CKEDITOR_CONFIGS = {
     "default": {
-        "skin": "moono-lisa",
+        "skin":
+        "moono-lisa",
         # 'skin': 'office2013',
         "toolbar_Basic": [["Source", "-", "Bold", "Italic"]],
         "toolbar_YourCustomToolbarConfig": [
             {
-                "name": "document",
+                "name":
+                "document",
                 "items": [
                     "Source",
                     "-",
@@ -233,7 +244,8 @@ CKEDITOR_CONFIGS = {
                 ],
             },
             {
-                "name": "clipboard",
+                "name":
+                "clipboard",
                 "items": [
                     "Cut",
                     "Copy",
@@ -245,9 +257,13 @@ CKEDITOR_CONFIGS = {
                     "Redo",
                 ],
             },
-            {"name": "editing", "items": ["Find", "Replace", "-", "SelectAll"]},
             {
-                "name": "forms",
+                "name": "editing",
+                "items": ["Find", "Replace", "-", "SelectAll"]
+            },
+            {
+                "name":
+                "forms",
                 "items": [
                     "Form",
                     "Checkbox",
@@ -262,7 +278,8 @@ CKEDITOR_CONFIGS = {
             },
             "/",
             {
-                "name": "basicstyles",
+                "name":
+                "basicstyles",
                 "items": [
                     "Bold",
                     "Italic",
@@ -275,7 +292,8 @@ CKEDITOR_CONFIGS = {
                 ],
             },
             {
-                "name": "paragraph",
+                "name":
+                "paragraph",
                 "items": [
                     "NumberedList",
                     "BulletedList",
@@ -296,9 +314,13 @@ CKEDITOR_CONFIGS = {
                     "Language",
                 ],
             },
-            {"name": "links", "items": ["Link", "Unlink", "Anchor"]},
             {
-                "name": "insert",
+                "name": "links",
+                "items": ["Link", "Unlink", "Anchor"]
+            },
+            {
+                "name":
+                "insert",
                 "items": [
                     "Image",
                     "Flash",
@@ -311,13 +333,26 @@ CKEDITOR_CONFIGS = {
                 ],
             },
             "/",
-            {"name": "styles", "items": ["Styles", "Format", "Font", "FontSize"]},
-            {"name": "colors", "items": ["TextColor", "BGColor"]},
-            {"name": "tools", "items": ["Maximize", "ShowBlocks"]},
-            {"name": "about", "items": ["About"]},
+            {
+                "name": "styles",
+                "items": ["Styles", "Format", "Font", "FontSize"]
+            },
+            {
+                "name": "colors",
+                "items": ["TextColor", "BGColor"]
+            },
+            {
+                "name": "tools",
+                "items": ["Maximize", "ShowBlocks"]
+            },
+            {
+                "name": "about",
+                "items": ["About"]
+            },
             "/",  # put this to force next toolbar on new line
             {
-                "name": "yourcustomtools",
+                "name":
+                "yourcustomtools",
                 "items": [
                     # put the name of your editor.ui.addButton here
                     "Preview",
@@ -325,7 +360,8 @@ CKEDITOR_CONFIGS = {
                 ],
             },
         ],
-        "toolbar": "YourCustomToolbarConfig",  # put selected toolbar config here
+        "toolbar":
+        "YourCustomToolbarConfig",  # put selected toolbar config here
         # 'toolbarGroups': [{ 'name': 'document', 'groups': [ 'mode', 'document', 'doctools' ] }],
         # 'height': 291,
         # 'width': '100%',
@@ -333,31 +369,32 @@ CKEDITOR_CONFIGS = {
         # 'filebrowserWindowWidth': 940,
         # 'toolbarCanCollapse': True,
         # 'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
-        "tabSpaces": 4,
-        "extraPlugins": ",".join(
-            [
-                "uploadimage",  # the upload image feature
-                # your extra plugins here
-                "div",
-                "autolink",
-                "autoembed",
-                "embedsemantic",
-                "autogrow",
-                # 'devtools',
-                "widget",
-                "lineutils",
-                "clipboard",
-                "dialog",
-                "dialogui",
-                "elementspath",
-            ]
-        ),
+        "tabSpaces":
+        4,
+        "extraPlugins":
+        ",".join([
+            "uploadimage",  # the upload image feature
+            # your extra plugins here
+            "div",
+            "autolink",
+            "autoembed",
+            "embedsemantic",
+            "autogrow",
+            # 'devtools',
+            "widget",
+            "lineutils",
+            "clipboard",
+            "dialog",
+            "dialogui",
+            "elementspath",
+        ]),
     }
 }
 
 # DATABASES
 # ------------------------------------------------------------------------------
-DATABASES["default"]["CONN_MAX_AGE"] = env.int("CONN_MAX_AGE", default=60)  # noqa: F405
+DATABASES["default"]["CONN_MAX_AGE"] = env.int("CONN_MAX_AGE",
+                                               default=60)  # noqa: F405
 
 # CACHES
 # ------------------------------------------------------------------------------
@@ -398,7 +435,8 @@ LOGGING = {
     "disable_existing_loggers": True,
     "formatters": {
         "verbose": {
-            "format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s",
+            "format":
+            "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s",
         },
     },
     "handlers": {
@@ -408,7 +446,10 @@ LOGGING = {
             "formatter": "verbose",
         }
     },
-    "root": {"level": "INFO", "handlers": ["console"]},
+    "root": {
+        "level": "INFO",
+        "handlers": ["console"]
+    },
     "loggers": {
         "django.db.backends": {
             "level": "ERROR",
@@ -416,7 +457,11 @@ LOGGING = {
             "propagate": False,
         },
         # Errors logged by the SDK itself
-        "sentry_sdk": {"level": "ERROR", "handlers": ["console"], "propagate": False},
+        "sentry_sdk": {
+            "level": "ERROR",
+            "handlers": ["console"],
+            "propagate": False
+        },
         "django.security.DisallowedHost": {
             "level": "ERROR",
             "handlers": ["console"],
@@ -439,14 +484,12 @@ CSRF_COOKIE_SECURE = True
 SECURE_HSTS_SECONDS = 60
 # https://docs.djangoproject.com/en/dev/ref/settings/#secure-hsts-include-subdomains
 SECURE_HSTS_INCLUDE_SUBDOMAINS = env.bool(
-    "DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS", default=True
-)
+    "DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS", default=True)
 # https://docs.djangoproject.com/en/dev/ref/settings/#secure-hsts-preload
 SECURE_HSTS_PRELOAD = env.bool("DJANGO_SECURE_HSTS_PRELOAD", default=True)
 # https://docs.djangoproject.com/en/dev/ref/middleware/#x-content-type-options-nosniff
-SECURE_CONTENT_TYPE_NOSNIFF = env.bool(
-    "DJANGO_SECURE_CONTENT_TYPE_NOSNIFF", default=True
-)
+SECURE_CONTENT_TYPE_NOSNIFF = env.bool("DJANGO_SECURE_CONTENT_TYPE_NOSNIFF",
+                                       default=True)
 # https://docs.djangoproject.com/en/dev/ref/settings/#session-cookie-httponly
 SESSION_COOKIE_HTTPONLY = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#csrf-cookie-httponly
@@ -459,7 +502,8 @@ X_FRAME_OPTIONS = "DENY"
 sentry_sdk.init(
     dsn=env(
         "SENTRY_DSN",
-        default="https://0cff28b5fc3edb790db73995bc4b9fe4@o4505345204224000.ingest.sentry.io/4506361942441984",
+        default=
+        "https://0cff28b5fc3edb790db73995bc4b9fe4@o4505345204224000.ingest.sentry.io/4506361942441984",
     ),
     # Set traces_sample_rate to 1.0 to capture 100%
     # of transactions for performance monitoring.
