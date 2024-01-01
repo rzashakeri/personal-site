@@ -95,3 +95,6 @@ class VisitModelTest(TestCase):
 
     def test_visit_str(self):
         self.assertEqual(str(self.visit), 'Test Post - 127.0.0.1')
+
+    def test_visit_count(self):
+        self.assertEqual(self.post.visit_count, 1)
