@@ -1,6 +1,8 @@
 from django.test import TestCase
 from django.core.files.uploadedfile import SimpleUploadedFile
-from blog.models import Post, Tag
+from blog.models import Post, Tag, Visit
+
+
 class PostModelTest(TestCase):
     def setUp(self):
         self.tag1 = Tag.objects.create(name='tag1')
@@ -53,7 +55,6 @@ class PostModelTest(TestCase):
         self.assertEqual(post.tags.count(), 0)
 
 
-
 class TagModelTest(TestCase):
 
     def setUp(self):
@@ -81,3 +82,16 @@ class TagModelTest(TestCase):
         self.assertEqual(tags[0], tag1)
         self.assertEqual(tags[1], self.tag)
         self.assertEqual(tags[2], tag2)
+
+
+class VisitModelTest(TestCase):
+    def setUp(self):
+        self.post = Post.objects.create(
+            title='Test Post',
+            icon=SimpleUploadedFile('icon.png', b''),
+            content='Test content'
+        )
+        self.visit = Visit.objects.create(post=self.post, ip_address='127.0.0.1')
+
+    def test_visit_str(self):
+        self.assertEqual(str(self.visit), 'Test Post - 127.0.0.1')
