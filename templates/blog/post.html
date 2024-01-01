@@ -1,15 +1,19 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %}
     {{ page.title }}
 {% endblock %}
 {% block content %}
     <div class="post">
         <h1 class="post-title">{{ page.title }}</h1>
-        <span class="post-date">created at {{ page.created_at }}</span>
+        <div class="post-head">
+            <span class="post-date">created at {{ page.created_at }} </span>
+            <span>|</span>
+            <span class="post-view"><img src="{% static 'images/icons/view.svg' %}" alt=""> <span>{{ page.visit_count }}</span></span>
+        </div>
         <div class="post-description">{{ page.content|safe }}</div>
         {% for tag in page.tags.all %}
-        <a href="{% url 'tag' name=tag %}" class="post-tag">#{{ tag }}</a>
+            <a href="{% url 'tag' name=tag %}" class="post-tag">#{{ tag }}</a>
         {% endfor %}
     </div>
 {% endblock %}
