@@ -8,5 +8,8 @@
       "name": "media",
       "mountTo": "media"
     }
-  ]
+  ],
+  "build": {
+    "location": "germany"
+  }
 }
