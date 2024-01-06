@@ -12,6 +12,7 @@ urlpatterns = [
     path("", include("pages.urls")),
     path("blog/", include("blog.urls")),
     path('captcha/', include('captcha.urls')),
+    path('djga/', include('google_analytics.urls')),
     # Django Admin, use {% url 'admin:index' %}
     path('admin/', include('admin_honeypot.urls')),
     path(ADMIN_URL, admin.site.urls),
