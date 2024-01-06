@@ -385,7 +385,7 @@ sentry_sdk.init(
 
 # GOOGLE ANALYTICS
 # ------------------------------------------------------------------------------
-GOOGLE_ANALYTICS_ID = env("GOOGLE_ANALYTICS_ID")
+GOOGLE_ANALYTICS_ID = env("GOOGLE_ANALYTICS_ID", default='G-69QYSEMC25')
 GOOGLE_ANALYTICS = {
     'google_analytics_id': GOOGLE_ANALYTICS_ID,
 }
