@@ -1,4 +1,4 @@
-{% load static i18n render_partial %}<!DOCTYPE html>
+{% load static i18n render_partial google_analytics_tags %}<!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
@@ -40,6 +40,9 @@
     {% endfor %}
 {% endif %}
 {% include 'shared/header.html' %}
+<div style="display:none">
+    <img src="{% google_analytics %}" width="0" height="0"  alt=""/>
+</div>
 <main class="main">
     <div id="wrapper">
         <div id="container">

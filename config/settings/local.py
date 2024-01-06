@@ -48,3 +48,10 @@ STATICFILES_FINDERS = [
 MEDIA_ROOT = str(BASE_DIR / "media")
 # https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 MEDIA_URL = "/media/"
+
+# GOOGLE ANALYTICS
+# ------------------------------------------------------------------------------
+GOOGLE_ANALYTICS_ID = env("GOOGLE_ANALYTICS_ID")
+GOOGLE_ANALYTICS = {
+    'google_analytics_id': GOOGLE_ANALYTICS_ID,
+}
